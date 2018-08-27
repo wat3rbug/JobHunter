@@ -23,6 +23,7 @@ public class JobHunt {
 
             frame.getContentPane().add(background);
             frame.setVisible(true);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     /**

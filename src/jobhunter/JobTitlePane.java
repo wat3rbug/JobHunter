@@ -5,4 +5,7 @@ package jobhunter;
  */
 public class JobTitlePane extends TabPane {
 
+    public JobTitlePane() {
+        super("Job Title");
+    }
 }

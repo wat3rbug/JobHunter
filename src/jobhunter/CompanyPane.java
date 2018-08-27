@@ -7,6 +7,6 @@ package jobhunter;
 public class CompanyPane extends TabPane{
 
     public CompanyPane() {
-        
+        super("Company");
     }
 }

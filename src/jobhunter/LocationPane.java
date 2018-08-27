@@ -6,7 +6,7 @@ package jobhunter;
 public class LocationPane extends TabPane {
     
     public LocationPane() {
-        
+        super("Location");
     }
 
 }
