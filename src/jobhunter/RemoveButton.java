@@ -10,11 +10,11 @@ import javax.swing.JButton;
  * skill-set with Java since I haven't used it in years.
  */
 
-public class AddButton extends JButton {
+public class RemoveButton extends JButton {
 
-    private static final long serialVersionUID = -1019539337741869743L;
+    private static final long serialVersionUID = -1019539337741869744L;
     
-    public AddButton() {
-        this.setText("Add");
+    public RemoveButton() {
+        this.setText("Remove");
     }
 }
