@@ -9,8 +9,8 @@ public class Location {
 
     private static int lastId = 1;
 
-    private int id;
-    private String loc;
+    private final int id;
+    private final String loc;
 
     public Location(String loc) {
             this.loc = loc;

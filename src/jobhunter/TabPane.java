@@ -15,12 +15,12 @@ import javax.swing.JList;
  * Base class for the other panes so that I can modify some of the behaviors   
  */
 
-public class TabPane extends JPanel implements ITabPane {
+public abstract class TabPane extends JPanel {
 
     private static final long serialVersionUID = 5518322545480912355L;
-    private JPanel addPanel;
-    private JPanel listingPanel;
-    private AddButton adder;
+    protected final JPanel addPanel;
+    protected final JPanel listingPanel;
+    protected final AddButton adder;
 
     public TabPane(String text) {
         listingPanel = new JPanel();
@@ -52,30 +52,5 @@ public class TabPane extends JPanel implements ITabPane {
      * @param isCheckBox Determines if the input is a check-box or not.
      */
     
-    @Override
-    public void addEntry(String text, boolean isCheckBox) {
-        if (isCheckBox) 
-            AddCheckBox(text);
-        else AddTextBox(text);
-    }
-    
-    private void AddCheckBox(String text) {
-        JCheckBox checker = new JCheckBox(text);
-        addPanel.remove(adder);
-        addPanel.add(checker);
-        addPanel.add(adder);
-    }
-    
-    private void AddTextBox(String text) {
-        JPanel newText = new JPanel();
-        JLabel labeler = new JLabel(text);
-        JTextField insertLabel = new JTextField();
-        newText.add(labeler);
-        newText.add(insertLabel);
-        newText.setLayout(new GridLayout(1, 2));
-        
-        addPanel.remove(adder);
-        addPanel.add(newText);
-        addPanel.add(adder);
-    }
+    public abstract void addEntry(String text, boolean isCheckBox);
 }

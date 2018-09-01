@@ -9,8 +9,8 @@ public class JobTitle {
 
     private static int lastId = 1;
     
-    private String jobTitle;
-    private int id;
+    private final String jobTitle;
+    private final int id;
 
     public JobTitle(String title) {
             this.jobTitle = title;
