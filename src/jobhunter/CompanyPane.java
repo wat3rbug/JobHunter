@@ -1,6 +1,7 @@
 package jobhunter;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +18,10 @@ public class CompanyPane extends TabPane {
         addEntry("Staffing", true);
     }
     
+    @Override
+    public void addObjectList(ArrayList listing) {
+        super.objectListing = listing;
+    }
     @Override
     public void addEntry(String text, boolean isCheckBox) {
         if (isCheckBox) 

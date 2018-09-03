@@ -1,10 +1,11 @@
 package jobhunter;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ public abstract class TabPane extends JPanel {
     protected final JPanel addPanel;
     protected final JPanel listingPanel;
     protected final AddButton adder;
+    protected ArrayList objectListing;
 
     public TabPane(String text) {
         listingPanel = new JPanel();
@@ -44,6 +46,13 @@ public abstract class TabPane extends JPanel {
         this.setLayout(grid);
         this.add(addPanel);
         this.add(listingPanel);
+        adder.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }
 
     /**
@@ -53,4 +62,7 @@ public abstract class TabPane extends JPanel {
      */
     
     public abstract void addEntry(String text, boolean isCheckBox);
+    
+    public abstract void addObjectList(ArrayList listing);
+    
 }

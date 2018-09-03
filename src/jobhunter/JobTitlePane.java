@@ -1,6 +1,6 @@
 package jobhunter;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.util.ArrayList;
 
 /**
  * @author Douglas Gardiner
@@ -14,5 +14,10 @@ public class JobTitlePane extends TabPane {
     @Override
     public void addEntry(String text, boolean isCheckBox) {
         
+    }
+
+    @Override
+    public void addObjectList(ArrayList listing) {
+        super.objectListing = listing;  
     }
 }
