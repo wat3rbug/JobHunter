@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 /**
  * @author Douglas Gardiner
@@ -22,8 +24,9 @@ public abstract class TabPane extends JPanel {
     protected final JPanel addPanel;
     protected final JPanel listingPanel;
     protected final AddButton adder;
-    protected ArrayList objectListing;
     protected JTextField insertField;
+    JList<String> listings;
+    DefaultListModel<String> objectListings;
 
     public TabPane(String text) {
         listingPanel = new JPanel();
@@ -39,9 +42,13 @@ public abstract class TabPane extends JPanel {
         addPanel.add(insertLabel);
         addPanel.add(insertField);
         addPanel.add(adder);
-               
-        JList listings = new JList();
-        listingPanel.add(listings);
+         
+        objectListings = new DefaultListModel();
+        listings = new JList(objectListings);
+        
+        JScrollPane scroller = new JScrollPane(listings);
+        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        listingPanel.add(scroller);
         
         GridLayout grid = new GridLayout(1, 2);
         this.setLayout(grid);
@@ -49,14 +56,17 @@ public abstract class TabPane extends JPanel {
         this.add(listingPanel);
     }
 
+    public void addEntry(String text) {
+        if (text != null) {
+            objectListings.addElement(text);
+            listings = new JList(objectListings);
+        }
+    }
     /**
      * Allows additional boxes to be added in future use cases.
      * @param text The title for the text to be entered.
      * @param isCheckBox Determines if the input is a check-box or not.
      */
     
-    public abstract void addEntry(String text, boolean isCheckBox);
-    
-    public abstract void addObjectList(ArrayList listing);
-    
+    public abstract void addEntry(String text, boolean isCheckBox);   
 }

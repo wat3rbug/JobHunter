@@ -48,6 +48,7 @@ public class JobHuntPane extends JPanel {
         // right hand panel top portion with job listings
         
         JPanel jobs = new JPanel();
+        BoxLayout jobsbox = new BoxLayout(jobs, BoxLayout.Y_AXIS);
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         JScrollPane listScroller = new JScrollPane(joblistings);
         listScroller.setPreferredSize(new Dimension(160, 100));
