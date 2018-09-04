@@ -1,5 +1,7 @@
 package jobhunter;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -9,6 +11,7 @@ public class LocationPane extends TabPane {
     
     public LocationPane() {
         super("Location");
+        super.adder.addActionListener(new Listener());
     }
     
     @Override
@@ -23,5 +26,16 @@ public class LocationPane extends TabPane {
     public void addObjectList(ArrayList listings) {
         super.objectListing = listings;
         
+    }
+
+    private class Listener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if (objectListing != null) {
+                Location temp = new Location(insertField.getText());
+                objectListing.add(temp);
+            }
+        }
     }
 }

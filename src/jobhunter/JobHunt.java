@@ -14,16 +14,19 @@ import javax.swing.JTabbedPane;
  */
 
 public class JobHunt {
+    
 
     public JobHunt() {
         CompanyPane company = new CompanyPane();
         LocationPane location = new LocationPane();
         JobTitlePane title = new JobTitlePane();
+        JobHuntPane totals = new JobHuntPane(this);
         JFrame frame = new JFrame("JobHunter");
         JTabbedPane background = new JTabbedPane();
         background.addTab("Company", null, company);
         background.addTab("Location", null, location);
         background.addTab("Job Title", null, title);
+        background.addTab("Jobs", null, totals);
         background.setPreferredSize(new Dimension (800, 300));
         background.setMinimumSize(new Dimension (800, 300));
         JPanel overall = new JPanel();
@@ -43,7 +46,10 @@ public class JobHunt {
      */
     
     public static void main(String[] args) {
+        // read a file if found
+        
         JobHunt main = new JobHunt();
     }
+    
     
 }

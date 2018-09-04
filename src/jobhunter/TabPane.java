@@ -23,13 +23,14 @@ public abstract class TabPane extends JPanel {
     protected final JPanel listingPanel;
     protected final AddButton adder;
     protected ArrayList objectListing;
+    protected JTextField insertField;
 
     public TabPane(String text) {
         listingPanel = new JPanel();
         addPanel = new JPanel();
         
         JLabel insertLabel = new JLabel(text);
-        JTextField insertField = new JTextField();
+        insertField = new JTextField();
      
         addPanel.setBorder(BorderFactory.createEtchedBorder());
         BoxLayout flow = new BoxLayout(addPanel, BoxLayout.Y_AXIS);
@@ -46,13 +47,6 @@ public abstract class TabPane extends JPanel {
         this.setLayout(grid);
         this.add(addPanel);
         this.add(listingPanel);
-        adder.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
     }
 
     /**
