@@ -13,5 +13,4 @@ public class Job {
     public Company company;
     public Date date;
     public boolean hadInterview;
-    
 }

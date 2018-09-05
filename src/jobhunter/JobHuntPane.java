@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,7 +18,8 @@ import javax.swing.ListSelectionModel;
 public class JobHuntPane extends JPanel {
     
     private static Dimension defaults = new Dimension(180, 220);
-    private JList joblistings;
+    private DefaultListModel<Job> joblist;
+    private JList<Job> joblistings;
     private Object delegate;
     private CompanyMiniPane companies;
     private LocationMiniPane locations;
@@ -26,6 +28,7 @@ public class JobHuntPane extends JPanel {
     public JobHuntPane(Object delegate) {
         
         this.delegate = delegate;
+        //joblist = new DefaultListModel<Job>(delegate.joblist);
         
         // first 3 panels that list company, etc for adding a job
         
@@ -48,14 +51,13 @@ public class JobHuntPane extends JPanel {
         // right hand panel top portion with job listings
         
         JPanel jobs = new JPanel();
-        BoxLayout jobsbox = new BoxLayout(jobs, BoxLayout.Y_AXIS);
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         JScrollPane listScroller = new JScrollPane(joblistings);
         listScroller.setPreferredSize(new Dimension(160, 100));
-        jobs.add(listScroller);
-        
+        jobs.add(listScroller);       
         AddButton adder = new AddButton();
         jobs.add(adder);
+        BoxLayout jobsbox = new BoxLayout(jobs, BoxLayout.Y_AXIS);
         this.add(jobs);
     }
     

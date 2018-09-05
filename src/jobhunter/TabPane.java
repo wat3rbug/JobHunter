@@ -1,5 +1,6 @@
 package jobhunter;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public abstract class TabPane extends JPanel {
     protected JTextField insertField;
     JList<String> listings;
     DefaultListModel<String> objectListings;
+    private Dimension inputDefault = new Dimension(200, 30);
 
     public TabPane(String text) {
         listingPanel = new JPanel();
@@ -34,6 +36,8 @@ public abstract class TabPane extends JPanel {
         
         JLabel insertLabel = new JLabel(text);
         insertField = new JTextField();
+        insertField.setPreferredSize(inputDefault);
+        insertField.setMaximumSize(inputDefault);
      
         addPanel.setBorder(BorderFactory.createEtchedBorder());
         BoxLayout flow = new BoxLayout(addPanel, BoxLayout.Y_AXIS);
