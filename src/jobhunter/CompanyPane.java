@@ -3,10 +3,12 @@ package jobhunter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -15,29 +17,40 @@ import javax.swing.JTextField;
 
 public class CompanyPane extends TabPane {
 
+    protected DefaultListModel<Company> objectListings;
+    protected JList<Company> companyListing;
+    protected JCheckBox checker;
+    protected JScrollPane scroller;
+    
+    
     public CompanyPane() {
         super("Company");
         addEntry("Staffing", true);
-        super.adder.addActionListener(new AddListener());
+        objectListings = new DefaultListModel<Company>();
+        companyListing = new JList<Company>(objectListings);
+        scroller = new JScrollPane(companyListing);
+        listingPanel.add(scroller);
+        adder.addActionListener(new AddListener());
+        
     }
     protected class AddListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             String temp = insertField.getText();
-            addEntry(temp);
+            boolean isStaffing = StringExtender.toBooleanValue(checker.getText());
+            addEntry(temp, isStaffing);
         }     
     }
 
-    @Override
-    public void addEntry(String text, boolean isCheckBox) {
+    private void addEntry(String text, boolean isCheckBox) {
         if (isCheckBox) 
             AddCheckBox(text);
         else AddTextBox(text);
     }
     
     private void AddCheckBox(String text) {
-        JCheckBox checker = new JCheckBox(text);
+        checker = new JCheckBox(text);
         addPanel.remove(adder);
         addPanel.add(checker);
         addPanel.add(adder);
