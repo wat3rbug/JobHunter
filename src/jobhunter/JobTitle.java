@@ -16,4 +16,9 @@ public class JobTitle {
             this.jobTitle = title;
             this.id = lastId++;
     }
+    
+    @Override
+    public String toString() {
+        return jobTitle;
+    }
 }

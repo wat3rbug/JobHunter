@@ -24,4 +24,13 @@ public class Company {
         this(name);
         this.isStaffing = StringExtender.toBooleanValue(isStaffing);     
     }
+    
+    @Override
+    public String toString() {
+        if (isStaffing == true) return companyName + ", staffing";
+        else return companyName;
+        
+        // this should easily be written as but its not working with is IDE
+        // return companyName + (isStaffing ? ", staffing" : " ");
+    }
 }

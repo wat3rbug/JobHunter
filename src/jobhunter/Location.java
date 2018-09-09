@@ -16,4 +16,9 @@ public class Location {
             this.loc = loc;
             this.id = lastId++;
     }
+    
+    @Override
+    public String toString() {
+        return loc;
+    }
 }
