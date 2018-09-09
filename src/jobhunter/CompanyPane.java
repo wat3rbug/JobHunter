@@ -3,12 +3,10 @@ package jobhunter;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
+import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 /**
@@ -17,29 +15,26 @@ import javax.swing.JTextField;
 
 public class CompanyPane extends TabPane {
 
-    protected DefaultListModel<Company> objectListings;
-    protected JList<Company> companyListing;
     protected JCheckBox checker;
-    protected JScrollPane scroller;
+    private ArrayList<Company> companies;
     
     
     public CompanyPane() {
-        super("Company");
-        addEntry("Staffing", true);
-        objectListings = new DefaultListModel<Company>();
-        companyListing = new JList<Company>(objectListings);
-        scroller = new JScrollPane(companyListing);
-        listingPanel.add(scroller);
+        super("Company");    
+        companies = new ArrayList<Company>();
         adder.addActionListener(new AddListener());
-        
+        addEntry("Staffing", true);
     }
     protected class AddListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String temp = insertField.getText();
-            boolean isStaffing = StringExtender.toBooleanValue(checker.getText());
-            addEntry(temp, isStaffing);
+            String name = insertField.getText();
+            boolean staffing = checker.isSelected();
+            String isStaffing = StringExtender.toYesNoString(staffing);
+            Company temp = new Company(name, isStaffing);
+            companies.add(temp);
+            addEntry(temp.toString());
         }     
     }
 

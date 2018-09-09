@@ -2,6 +2,7 @@ package jobhunter;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -11,16 +12,11 @@ import javax.swing.JScrollPane;
  */
 public class LocationPane extends TabPane {
     
-    protected DefaultListModel<Location> objectListings;
-    protected JList<Location> locationListing;
-    protected JScrollPane scroller;
+    private ArrayList<Location> locationListing;
     
     public LocationPane() {
         super("Location");
-        objectListings = new DefaultListModel<Location>();
-        locationListing = new JList<Location>(objectListings);
-        scroller = new JScrollPane(locationListing);
-        listingPanel.add(scroller);
+        locationListing = new ArrayList<Location>();
         adder.addActionListener(new AddListener());
     }
     
@@ -29,13 +25,8 @@ public class LocationPane extends TabPane {
         @Override
         public void actionPerformed(ActionEvent e) {
             Location temp = new Location(insertField.getText());
-            addEntry(temp);
+            locationListing.add(temp);
+            addEntry(temp.toString());
         }     
-    }
-    private void addEntry(Location loc) {
-        if (loc != null) {
-            objectListings.addElement(loc);
-            locationListing = new JList(objectListings);
-        }
     }
 }

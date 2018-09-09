@@ -18,8 +18,8 @@ import javax.swing.ListSelectionModel;
 public class JobHuntPane extends JPanel {
     
     
-    private DefaultListModel<Job> joblist;
-    private JList<Job> joblistings;
+    private DefaultListModel joblist;
+    private JList joblistings;
     private Object delegate;
     private CompanyMiniPane companies;
     private LocationMiniPane locations;

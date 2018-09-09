@@ -23,6 +23,9 @@ public class TabPane extends JPanel {
     protected final JPanel listingPanel;
     protected final AddButton adder;
     protected JTextField insertField;
+    protected DefaultListModel objectListing;
+    private JList listing;
+    private JScrollPane scroller;
     protected static Dimension inputDefault = new Dimension(200, 30);
     protected static Dimension listingDefault = new Dimension(350, 230);
 
@@ -34,6 +37,13 @@ public class TabPane extends JPanel {
         insertField = new JTextField();
         insertField.setPreferredSize(inputDefault);
         insertField.setMaximumSize(inputDefault);
+        objectListing = new DefaultListModel();
+        listing = new JList(objectListing);
+        scroller = new JScrollPane(listing);
+        scroller.setMinimumSize(listingDefault);
+        scroller.setPreferredSize(listingDefault);
+        scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        listingPanel.add(scroller);
      
         addPanel.setBorder(BorderFactory.createEtchedBorder());
         BoxLayout flow = new BoxLayout(addPanel, BoxLayout.Y_AXIS);
@@ -47,5 +57,9 @@ public class TabPane extends JPanel {
         this.setLayout(grid);
         this.add(addPanel);
         this.add(listingPanel);
+    }
+    
+    protected void addEntry(String text) {
+        objectListing.addElement(text);
     }
 }
