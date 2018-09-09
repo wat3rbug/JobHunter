@@ -1,5 +1,9 @@
 package jobhunter;
 
+import jobhunter.pane.JobHuntPane;
+import jobhunter.pane.CompanyPane;
+import jobhunter.pane.JobTitlePane;
+import jobhunter.pane.LocationPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
