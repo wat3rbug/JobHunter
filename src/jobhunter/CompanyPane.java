@@ -39,8 +39,7 @@ public class CompanyPane extends TabPane {
     }
 
     private void addEntry(String text, boolean isCheckBox) {
-        if (isCheckBox) 
-            AddCheckBox(text);
+        if (isCheckBox) AddCheckBox(text);
         else AddTextBox(text);
     }
     
