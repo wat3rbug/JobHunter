@@ -17,7 +17,7 @@ import javax.swing.ListSelectionModel;
  */
 public class JobHuntPane extends JPanel {
     
-    private static Dimension defaults = new Dimension(180, 220);
+    
     private DefaultListModel<Job> joblist;
     private JList<Job> joblistings;
     private Object delegate;
@@ -38,10 +38,9 @@ public class JobHuntPane extends JPanel {
         
         locations.setBorder(BorderFactory.createTitledBorder("Locations"));
         titles.setBorder(BorderFactory.createTitledBorder("Job Titles"));
+        companies.setBorder(BorderFactory.createTitledBorder("Companies"));
         JPanel selectors = new JPanel();
-        companies.setPreferredSize(defaults);
-        locations.setPreferredSize(defaults);
-        titles.setPreferredSize(defaults);
+
         selectors.add(companies);
         selectors.add(locations);
         selectors.add(titles);
@@ -53,7 +52,6 @@ public class JobHuntPane extends JPanel {
         JPanel jobs = new JPanel();
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         JScrollPane listScroller = new JScrollPane(joblistings);
-        listScroller.setPreferredSize(new Dimension(160, 100));
         jobs.add(listScroller);       
         AddButton adder = new AddButton();
         jobs.add(adder);
