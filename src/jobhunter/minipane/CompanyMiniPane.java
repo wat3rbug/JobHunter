@@ -25,9 +25,4 @@ public class CompanyMiniPane extends MiniPane {
         scroller.setPreferredSize(new Dimension(180, 120));
         this.add(scroller);
     }
-    @Override
-    public Object[] getListing() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

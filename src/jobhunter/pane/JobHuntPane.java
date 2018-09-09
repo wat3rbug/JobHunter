@@ -1,5 +1,6 @@
 package jobhunter.pane;
 
+import java.awt.Dimension;
 import jobhunter.data.Job;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,15 +24,11 @@ public class JobHuntPane extends JPanel {
     
     private DefaultListModel joblist;
     private JList joblistings;
-    private Object delegate;
     private CompanyMiniPane companies;
     private LocationMiniPane locations;
     private JobTitleMiniPane titles;
 
     public JobHuntPane(Object delegate) {
-        
-        this.delegate = delegate;
-        //joblist = new DefaultListModel<Job>(delegate.joblist);
         
         // first 3 panels that list company, etc for adding a job
         
@@ -59,6 +56,8 @@ public class JobHuntPane extends JPanel {
         AddButton adder = new AddButton();
         jobs.add(adder);
         BoxLayout jobsbox = new BoxLayout(jobs, BoxLayout.Y_AXIS);
+        listScroller.setPreferredSize(new Dimension(180, 120));
+        
         this.add(jobs);
     }
     

@@ -2,6 +2,7 @@ package jobhunter.minipane;
 
 import jobhunter.data.Location;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
@@ -12,7 +13,7 @@ import javax.swing.JScrollPane;
 /**
  * @author Douglas Gardiner
  */
-public class LocationMiniPane extends MiniPane implements Observer {
+public class LocationMiniPane extends MiniPane {
 
     private DefaultListModel<Location> listing;
     private JList<Location> locationListing;
@@ -26,16 +27,5 @@ public class LocationMiniPane extends MiniPane implements Observer {
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setPreferredSize(new Dimension(180, 120));
         this.add(scroller);
-    }
-    
-    @Override
-    public Object[] getListing() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }   
 }

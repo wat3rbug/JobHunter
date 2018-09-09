@@ -4,10 +4,12 @@ import jobhunter.pane.JobHuntPane;
 import jobhunter.pane.CompanyPane;
 import jobhunter.pane.JobTitlePane;
 import jobhunter.pane.LocationPane;
+import jobhunter.data.Job;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import javax.swing.JTabbedPane;
 
 /**
@@ -45,14 +47,20 @@ public class JobHunt {
     }
     
     /**
-     * @param args the command line arguments which are not used.
+     * @param args the command line argument uses a single file name.  If none
+     * is used then the default 'config.xml' will be used.
      * 
      */
     
     public static void main(String[] args) {
-        // read a file if found
-        
+        ArrayList<Job> jobs; 
+        if (args.length == 3) {
+            jobs = FileOperations.read(args[2]);
+        } else {
+            jobs = FileOperations.read();
+        }      
         JobHunt main = new JobHunt();
+        main.use(jobs);
     }
     
     
