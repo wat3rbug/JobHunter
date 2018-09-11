@@ -29,4 +29,8 @@ public class JobTitleMiniPane extends MiniPane{
     public void addTitle(JobTitle title) {
         listing.addElement(title);
     }
+    
+    public JobTitle getSelected() {
+        return titleListing.getSelectedValue();
+    }
 }

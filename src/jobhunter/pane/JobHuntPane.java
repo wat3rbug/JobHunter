@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import jobhunter.data.Job;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -27,6 +29,7 @@ public class JobHuntPane extends JPanel {
     private CompanyMiniPane companies;
     private LocationMiniPane locations;
     private JobTitleMiniPane titles;
+    private ArrayList<Job> jobs;
 
     public JobHuntPane(Object delegate) {
         
@@ -35,15 +38,16 @@ public class JobHuntPane extends JPanel {
         companies = new CompanyMiniPane();
         locations = new LocationMiniPane();
         titles = new JobTitleMiniPane();
+        jobs = new ArrayList<Job>();
         
-        locations.setBorder(BorderFactory.createTitledBorder("Locations"));
         titles.setBorder(BorderFactory.createTitledBorder("Job Titles"));
         companies.setBorder(BorderFactory.createTitledBorder("Companies"));
+        locations.setBorder(BorderFactory.createTitledBorder("Locations"));
         JPanel selectors = new JPanel();
 
+        selectors.add(titles);
         selectors.add(companies);
         selectors.add(locations);
-        selectors.add(titles);
         BoxLayout boxlayout = new BoxLayout(selectors, BoxLayout.X_AXIS);
         this.add(selectors);
         
@@ -51,6 +55,8 @@ public class JobHuntPane extends JPanel {
         
         JPanel jobs = new JPanel();
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
+        joblist = new DefaultListModel();
+        joblistings = new JList(joblist);
         JScrollPane listScroller = new JScrollPane(joblistings);
         jobs.add(listScroller);       
         AddButton adder = new AddButton();
@@ -65,15 +71,22 @@ public class JobHuntPane extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            
-        }
-        
+            Job job = new Job();
+            job.company = companies.getSelected();
+            job.loc = locations.getSelected();
+            job.title = titles.getSelected();
+            job.hadInterview = false;
+            job.date = new Date();
+            jobs.add(job);
+            joblist.addElement(job);
+        }      
     }
     
-    public void addJobListings(Job[] jobs) {
-        joblistings = new JList(jobs);
-        joblistings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        joblistings.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-        joblistings.setVisibleRowCount(-1);
+    public void addJob(Job job) {
+        jobs.add(job);
+        companies.addCompany(job.company);
+        titles.addTitle(job.title);
+        locations.addLocation(job.loc);
+        joblist.addElement(job.toBriefString());
     }
 }

@@ -32,4 +32,8 @@ public class LocationMiniPane extends MiniPane {
     public void addLocation(Location loc) {
         listing.addElement(loc);
     }
+    
+    public Location getSelected() {
+        return locationListing.getSelectedValue();
+    }
 }
