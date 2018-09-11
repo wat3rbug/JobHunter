@@ -25,4 +25,8 @@ public class JobTitleMiniPane extends MiniPane{
         scroller.setPreferredSize(new Dimension(180, 120));
         this.add(scroller);
     }
+    
+    public void addTitle(JobTitle title) {
+        listing.addElement(title);
+    }
 }

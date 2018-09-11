@@ -18,11 +18,15 @@ public class CompanyMiniPane extends MiniPane {
     
     public CompanyMiniPane() {
         this.setBorder(BorderFactory.createTitledBorder("Companies"));
-        listing = new DefaultListModel<Company>();
-        companyListing = new JList<Company>(listing);
+        listing = new DefaultListModel();
+        companyListing = new JList(listing);
         scroller = new JScrollPane(companyListing);
         scroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setPreferredSize(new Dimension(180, 120));
         this.add(scroller);
+    }
+    
+    public void addCompany(Company company) {
+        listing.addElement(company);
     }
 }

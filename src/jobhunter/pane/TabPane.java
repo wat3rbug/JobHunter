@@ -60,7 +60,7 @@ public class TabPane extends JPanel {
         this.add(listingPanel);
     }
     
-    protected void addEntry(String text) {
+    public void addEntry(String text) {
         objectListing.addElement(text);
     }
 }

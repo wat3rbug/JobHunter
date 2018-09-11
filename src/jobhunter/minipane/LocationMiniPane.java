@@ -28,4 +28,8 @@ public class LocationMiniPane extends MiniPane {
         scroller.setPreferredSize(new Dimension(180, 120));
         this.add(scroller);
     }   
+    
+    public void addLocation(Location loc) {
+        listing.addElement(loc);
+    }
 }

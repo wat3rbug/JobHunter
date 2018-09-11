@@ -29,6 +29,10 @@ public class Job {
         return message;
     }
     
+    public String toBriefString() {
+        return title + " at " + company.toString() + " using " + loc;
+    }
+    
     public static Job getByXMLElement(Element el) {
         if (el == null) return null;
         Job job = new Job();

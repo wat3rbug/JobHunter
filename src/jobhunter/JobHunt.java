@@ -59,23 +59,23 @@ public class JobHunt {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
         frame.addWindowListener(new CloseUpShop());
         Application macApp = Application.getApplication();
-        macApp.setQuitHandler(new CloseShowByHotKey());
+        macApp.setQuitHandler(new CloseShopByHotKey());
     }
     
-    private class CloseShowByHotKey implements QuitHandler {
+    private class CloseShopByHotKey implements QuitHandler {
         
         @Override
         public void handleQuitRequestWith(AppEvent.QuitEvent qe, 
                 final QuitResponse qr) {
+            
             JobHunt.this.SaveAndQuit();
             qr.performQuit();
         }
     }
     
     private void SaveAndQuit() {
-        if (filename != null) FileOperations.write(filename, getJobs());
-        else FileOperations.write(getJobs());
-        System.out.println("saving...");
+//        if (filename != null) FileOperations.write(filename, getJobs());
+//        else FileOperations.write(getJobs());
     }
 
     
@@ -100,7 +100,7 @@ public class JobHunt {
             location.addEntry(temp.loc.toString());
             title.addEntry(temp.title.toString());
             company.addEntry(temp.company.toString());
-            //totals.addEntry()
+            totals.addJob(temp);
         }
         //company.add(companies);
         
