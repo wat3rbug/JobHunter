@@ -1,6 +1,8 @@
 package jobhunter;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +25,32 @@ public class FileOperations {
 
     public static ArrayList<Job> read() {
         return read("config.xml");
+    }
+    
+    public static void write(ArrayList<Job> jobs) {
+        write("config.xml", jobs);
+    }
+    
+    public static void write(String filename, ArrayList<Job> jobs) {
+        
+        /**
+         * I went the ghetto style because it is way too much work for
+         * what it does.  I would need to define tags as Elements, document them
+         * with Document Class and build the XML file with SAX Builder.  I may 
+         * revisit it so it is extensible, but not at this moment.
+         */
+        
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(new File(filename));
+            writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Jobs>\n");
+            for (int i = 0; i <jobs.size(); i++) {
+                writer.write(jobs.get(i).toXML());
+            }
+            writer.write("</Jobs>\n</xml>");
+        } catch (IOException ioe) {
+            
+        }  
     }
     
     public static ArrayList<Job> read(String filename) {
