@@ -1,6 +1,7 @@
 package jobhunter.data;
 
 import jobhunter.StringExtender;
+import org.w3c.dom.Element;
 
 /**
  * @author douglas
@@ -34,5 +35,19 @@ public class Company {
         
         // this should easily be written as but its not working with is IDE
         // return companyName + (isStaffing ? ", staffing" : " ");
+    }
+    public String toXML() {
+        String message = "\t<company>\n\t\t<name>" + companyName + "</name>\n" +
+                "\t\t<staffing>" + StringExtender.toYesNoString(isStaffing) +
+                "</staffing>\n\t</company>\n";
+        return message;
+    }
+    
+    public static Company getByXMLElement(Element el) {
+        if (el == null) return null;
+        String name = el.getElementsByTagName("name").item(0).getTextContent();
+        String staffingStr = el.getElementsByTagName("staffing").item(0)
+                .getTextContent();
+        return new Company(name, staffingStr);
     }
 }

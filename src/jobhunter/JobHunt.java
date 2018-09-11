@@ -11,6 +11,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JTabbedPane;
+import jobhunter.data.Company;
+import jobhunter.data.JobTitle;
+import jobhunter.data.Location;
 
 /**
  * @author Douglas Gardiner
@@ -21,12 +24,16 @@ import javax.swing.JTabbedPane;
 
 public class JobHunt {
     
-
+    private CompanyPane company;
+    private LocationPane location;
+    private JobTitlePane title;
+    private JobHuntPane totals;
+    
     public JobHunt() {
-        CompanyPane company = new CompanyPane();
-        LocationPane location = new LocationPane();
-        JobTitlePane title = new JobTitlePane();
-        JobHuntPane totals = new JobHuntPane(this);
+        company = new CompanyPane();
+        location = new LocationPane();
+        title = new JobTitlePane();
+        totals = new JobHuntPane(this);
         JFrame frame = new JFrame("JobHunter");
         JTabbedPane background = new JTabbedPane();
         background.addTab("Company", null, company);
@@ -42,8 +49,20 @@ public class JobHunt {
         frame.getContentPane().add(background);
         frame.pack();
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);           
+    }
+    
+    public void use(ArrayList<Job> jobs) {
+        
+        for(int i = 0; i < jobs.size(); i++) {
+            Job temp = jobs.get(i);
+            location.addEntry(temp.loc.toString());
+            title.addEntry(temp.title.toString());
+            company.addEntry(temp.company.toString());
+            //totals.addEntry()
+        }
+        //company.add(companies);
+        
     }
     
     /**
@@ -54,8 +73,8 @@ public class JobHunt {
     
     public static void main(String[] args) {
         ArrayList<Job> jobs; 
-        if (args.length == 3) {
-            jobs = FileOperations.read(args[2]);
+        if (args.length == 1) {
+            jobs = FileOperations.read(args[0]);
         } else {
             jobs = FileOperations.read();
         }      

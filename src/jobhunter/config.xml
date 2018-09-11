@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Job>
+    <date>todays date</Date>
+    <interview>yes</Interview>
+    <title>Software Engineer</title>
+    <location>sugarland</location>
+    <company>
+        <name>CyberCoders</name>
+        <staffing>yes</staffing>
+    </company>
+</Job>
