@@ -47,8 +47,8 @@ public class JobHunt {
         background.addTab("Location", null, location);
         background.addTab("Job Title", null, title);
         background.addTab("Jobs", null, totals);
-        background.setPreferredSize(new Dimension (800, 300));
-        background.setMinimumSize(new Dimension (800, 300));
+        background.setPreferredSize(new Dimension (800, 400));
+        background.setMinimumSize(new Dimension (800, 400));
         JPanel overall = new JPanel();
         FlowLayout flow = new FlowLayout();
         overall.setLayout(flow);

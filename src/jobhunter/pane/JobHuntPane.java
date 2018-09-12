@@ -43,28 +43,34 @@ public class JobHuntPane extends JPanel {
         titles.setBorder(BorderFactory.createTitledBorder("Job Titles"));
         companies.setBorder(BorderFactory.createTitledBorder("Companies"));
         locations.setBorder(BorderFactory.createTitledBorder("Locations"));
+        AddButton adder = new AddButton();
+        
         JPanel selectors = new JPanel();
-
         selectors.add(titles);
         selectors.add(companies);
         selectors.add(locations);
+        selectors.add(adder);
+        adder.addActionListener(new AddListener());
         BoxLayout boxlayout = new BoxLayout(selectors, BoxLayout.X_AXIS);
-        this.add(selectors);
         
-        // right hand panel top portion with job listings
+        // bottom panel with job listings
         
-        JPanel jobs = new JPanel();
-        jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         joblist = new DefaultListModel();
         joblistings = new JList(joblist);
         JScrollPane listScroller = new JScrollPane(joblistings);
-        jobs.add(listScroller);       
-        AddButton adder = new AddButton();
-        jobs.add(adder);
-        BoxLayout jobsbox = new BoxLayout(jobs, BoxLayout.Y_AXIS);
-        listScroller.setPreferredSize(new Dimension(180, 120));
+        listScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        Dimension miniDim = titles.getSize();
         
+        listScroller.setMinimumSize(new Dimension((180 * 3), 120));
+        listScroller.setPreferredSize(new Dimension((180 * 3), 120));
+        
+        JPanel jobs = new JPanel();
+        jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
+        jobs.add(listScroller);       
+        
+        this.add(selectors);
         this.add(jobs);
+        BoxLayout overall = new BoxLayout(this, BoxLayout.Y_AXIS);
     }
     
     private class AddListener implements ActionListener {
@@ -78,7 +84,7 @@ public class JobHuntPane extends JPanel {
             job.hadInterview = false;
             job.date = new Date();
             jobs.add(job);
-            joblist.addElement(job);
+            joblist.addElement(job.toBriefString());
         }      
     }
     
