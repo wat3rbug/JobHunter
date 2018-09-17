@@ -12,7 +12,7 @@ public class JobTitle {
 
     private static int lastId = 1;
     
-    private final String jobTitle;
+    public String jobTitle;
     private final int id;
 
     public JobTitle(String title) {

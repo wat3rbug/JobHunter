@@ -88,6 +88,10 @@ public class JobHuntPane extends JPanel {
         }      
     }
     
+    public ArrayList<Job> getJobs() {
+        return jobs;
+    }
+    
     public void addJob(Job job) {
         jobs.add(job);
         companies.addCompany(job.company);

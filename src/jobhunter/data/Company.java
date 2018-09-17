@@ -13,8 +13,8 @@ public class Company {
 
     private static int lastId = 1;
 
-    private String companyName;
-    private boolean isStaffing;
+    public String companyName;
+    public boolean isStaffing;
     private int id;
 
     public Company(String name) {

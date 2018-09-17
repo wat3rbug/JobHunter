@@ -74,8 +74,8 @@ public class JobHunt {
     }
     
     private void SaveAndQuit() {
-//        if (filename != null) FileOperations.write(filename, getJobs());
-//        else FileOperations.write(getJobs());
+        if (filename != null) FileOperations.write(filename, getJobs());
+        else FileOperations.write(getJobs());
     }
 
     
@@ -89,8 +89,7 @@ public class JobHunt {
      }
     
     private ArrayList<Job> getJobs() {
-        // not done
-        return new ArrayList<Job>();
+        return totals.getJobs();
     }
     
     public void use(ArrayList<Job> jobs) {

@@ -1,8 +1,7 @@
 package jobhunter;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,12 +10,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import jobhunter.data.Company;
 import jobhunter.data.Job;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Location;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 
 /**
  * @author Douglas Gardiner
@@ -39,18 +44,57 @@ public class FileOperations {
          * with Document Class and build the XML file with SAX Builder.  I may 
          * revisit it so it is extensible, but not at this moment.
          */
-        
-        FileWriter writer = null;
         try {
-            writer = new FileWriter(new File(filename));
-            writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Jobs>\n");
-            for (int i = 0; i <jobs.size(); i++) {
-                writer.write(jobs.get(i).toXML());
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
+            Element rootElement = doc.createElement("Jobs");
+            doc.appendChild(rootElement);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
+            for(Job job : jobs) {
+                Element latestJob = doc.createElement("job");
+                
+                Element loc = doc.createElement("location");
+                loc.appendChild(doc.createTextNode(job.loc.toString()));
+                latestJob.appendChild(loc);
+                
+                Element title = doc.createElement("title");
+                title.appendChild(doc.createTextNode(job.title.toString()));
+                latestJob.appendChild(title);
+                
+                Element jobDate = doc.createElement("date");
+                
+                jobDate.appendChild(doc.createTextNode(formatter.format(job.date)));
+                latestJob.appendChild(jobDate);
+                
+                Element hasInterview = doc.createElement("interview");
+                hasInterview.appendChild(doc.createTextNode(StringExtender
+                        .toYesNoString(job.hadInterview)));
+                latestJob.appendChild(hasInterview);
+                
+                Element company = doc.createElement("company");
+                Element companyName = doc.createElement("name");
+                companyName.appendChild(doc.createTextNode(job.company.companyName));
+                company.appendChild(companyName);
+                
+                Element companyStaff = doc.createElement("staffing");
+                companyStaff.appendChild(doc.createTextNode(StringExtender
+                        .toYesNoString(job.company.isStaffing)));
+                company.appendChild(companyStaff);
+                latestJob.appendChild(company);
+                rootElement.appendChild(latestJob);
             }
-            writer.write("</Jobs>\n</xml>");
-        } catch (IOException ioe) {
-            
-        }  
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer tFormer = tFactory.newTransformer();
+            DOMSource dSource = new DOMSource(doc);
+            StreamResult sResult = new StreamResult(new File(filename));
+            tFormer.transform(dSource, sResult);
+        } catch(ParserConfigurationException saxpe) {
+            // what to do if it fails?
+            System.out.println("xml build failed");
+        } catch (TransformerException te) {
+            System.out.println("transform failed");
+        }      
     }
     
     public static ArrayList<Job> read(String filename) {
@@ -72,7 +116,7 @@ public class FileOperations {
         ArrayList<Job> jobList = new ArrayList<Job>();
         doc.getDocumentElement().normalize();
         Element docElement = doc.getDocumentElement();
-        NodeList nList = doc.getElementsByTagName("Job");
+        NodeList nList = doc.getElementsByTagName("job");
         for (int i = 0; i < nList.getLength(); i++) {
             Node listItem = nList.item(i);
             Location loc = null;
