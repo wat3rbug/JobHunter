@@ -2,6 +2,8 @@ package jobhunter.pane;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.Collection;
+import java.util.Set;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import jobhunter.AddButton;
 
@@ -61,6 +64,6 @@ public class TabPane extends JPanel {
     }
     
     public void addEntry(String text) {
-        objectListing.addElement(text);
+        if (!objectListing.contains(text)) objectListing.addElement(text);
     }
 }

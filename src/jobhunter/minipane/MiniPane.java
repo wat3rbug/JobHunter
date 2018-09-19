@@ -13,6 +13,7 @@ public abstract class MiniPane extends JPanel {
 
     public void setListing(JList listing) {
         this.listing = listing; 
+        
     }
     
 }

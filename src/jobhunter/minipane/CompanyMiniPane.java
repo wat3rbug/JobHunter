@@ -27,7 +27,7 @@ public class CompanyMiniPane extends MiniPane {
     }
     
     public void addCompany(Company company) {
-        listing.addElement(company);
+        if (!listing.contains(company)) listing.addElement(company);
     }
     
     public Company getSelected() {
