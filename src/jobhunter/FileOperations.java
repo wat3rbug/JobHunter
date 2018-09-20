@@ -19,6 +19,7 @@ import jobhunter.data.Company;
 import jobhunter.data.Job;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Location;
+import jobhunter.data.Recruiter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -72,6 +73,11 @@ public class FileOperations {
                         .toYesNoString(job.hadInterview)));
                 latestJob.appendChild(hasInterview);
                 
+                Element recruiterSite = doc.createElement("recruiter");
+                recruiterSite.appendChild(doc.createTextNode(job.recruiter
+                        .toString()));
+                latestJob.appendChild(recruiterSite);
+                
                 Element company = doc.createElement("company");
                 Element companyName = doc.createElement("name");
                 companyName.appendChild(doc.createTextNode(job.company.companyName));
@@ -123,6 +129,7 @@ public class FileOperations {
             JobTitle title = null;
             Company company = null;
             Date jobDate = null;
+            Recruiter recruiter = null;
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             boolean interview = false;
             if (listItem.getNodeType() == Node.ELEMENT_NODE) {
@@ -130,6 +137,7 @@ public class FileOperations {
                 loc = Location.getByXMLElement(elem);
                 title = JobTitle.getByXMLElement(elem);
                 company = Company.getByXMLElement(elem);
+                recruiter = Recruiter.getByXMLElement(elem);
                 interview = StringExtender.toBooleanValue(elem
                         .getElementsByTagName("interview").item(0)
                         .getTextContent());
@@ -146,6 +154,7 @@ public class FileOperations {
             job.title = title;
             job.hadInterview = interview;
             job.date = jobDate;
+            job.recruiter = recruiter;
             jobList.add(job);
         }
         return jobList;

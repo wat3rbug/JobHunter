@@ -18,16 +18,9 @@ public class Job {
     public Location loc;
     public Company company;
     public Date date;
+    public Recruiter recruiter;
     public boolean hadInterview;
     
-    public String toXML() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        String message = "<Job>\n\t<date>" + formatter.format(date) +
-                "</date>\n\t<interview>" + title.toXML() + StringExtender
-                        .toYesNoString(hadInterview) + "</interview>\n" +
-                loc.toXML() + company.toXML() + "</Job>";
-        return message;
-    }
     
     public String toBriefString() {
         return title + " at " + company.toString() + " using " + loc;
@@ -47,6 +40,9 @@ public class Job {
                 .getTextContent());
         job.title = new JobTitle(el.getElementsByTagName("title").item(0)
                 .getTextContent());
+        job.recruiter = new Recruiter((el.getElementsByTagName("interview")
+                .item(0).getTextContent()));
+        
         // get company from xml
         NodeList elements =  el.getChildNodes();
         for (int i = 0 ; i < elements.getLength(); i++) {

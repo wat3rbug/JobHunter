@@ -12,11 +12,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import jobhunter.AddButton;
 import jobhunter.minipane.CompanyMiniPane;
 import jobhunter.minipane.JobTitleMiniPane;
 import jobhunter.minipane.LocationMiniPane;
+import jobhunter.minipane.RecruiterMiniPane;
 
 /**
  * @author Douglas Gardiner
@@ -29,6 +29,7 @@ public class JobHuntPane extends JPanel {
     private CompanyMiniPane companies;
     private LocationMiniPane locations;
     private JobTitleMiniPane titles;
+    private RecruiterMiniPane recruiters;
     private ArrayList<Job> jobs;
 
     public JobHuntPane(Object delegate) {
@@ -38,19 +39,16 @@ public class JobHuntPane extends JPanel {
         companies = new CompanyMiniPane();
         locations = new LocationMiniPane();
         titles = new JobTitleMiniPane();
+        recruiters = new RecruiterMiniPane();
         jobs = new ArrayList<Job>();
         
-        titles.setBorder(BorderFactory.createTitledBorder("Job Titles"));
-        companies.setBorder(BorderFactory.createTitledBorder("Companies"));
-        locations.setBorder(BorderFactory.createTitledBorder("Locations"));
         AddButton adder = new AddButton();
         
         JPanel selectors = new JPanel();
         selectors.add(titles);
         selectors.add(companies);
         selectors.add(locations);
-        selectors.add(adder);
-        adder.addActionListener(new AddListener());
+        selectors.add(recruiters);
         BoxLayout boxlayout = new BoxLayout(selectors, BoxLayout.X_AXIS);
         
         // bottom panel with job listings
@@ -66,7 +64,9 @@ public class JobHuntPane extends JPanel {
         
         JPanel jobs = new JPanel();
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
-        jobs.add(listScroller);       
+        jobs.add(listScroller); 
+        this.add(adder);
+        adder.addActionListener(new AddListener());
         
         this.add(selectors);
         this.add(jobs);
@@ -83,6 +83,7 @@ public class JobHuntPane extends JPanel {
             job.title = titles.getSelected();
             job.hadInterview = false;
             job.date = new Date();
+            job.recruiter = recruiters.getSelected();
             jobs.add(job);
             joblist.addElement(job.toBriefString());
         }      
@@ -97,6 +98,7 @@ public class JobHuntPane extends JPanel {
         companies.addCompany(job.company);
         titles.addTitle(job.title);
         locations.addLocation(job.loc);
+        recruiters.addRecruiter(job.recruiter);
         joblist.addElement(job.toBriefString());
     }
 }
