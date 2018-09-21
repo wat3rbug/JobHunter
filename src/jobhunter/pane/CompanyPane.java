@@ -20,10 +20,10 @@ public class CompanyPane extends TabPane implements ICompanyPane {
     protected JCheckBox checker;
     private ArrayList<Company> companies;
     private Company temp;
-    private ChangeListener delegate;
+    private IChangeListener delegate;
     
     
-    public CompanyPane(ChangeListener delegate) {
+    public CompanyPane(IChangeListener delegate) {
         super("Company");    
         this.delegate = delegate;
         companies = new ArrayList<Company>();
@@ -38,7 +38,7 @@ public class CompanyPane extends TabPane implements ICompanyPane {
     }
 
     @Override
-    public void setDelegate(ChangeListener delegate) {
+    public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
     protected class AddListener implements ActionListener {

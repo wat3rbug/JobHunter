@@ -21,7 +21,7 @@ import jobhunter.data.Company;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Language;
 import jobhunter.data.Location;
-import jobhunter.pane.ChangeListener;
+import jobhunter.pane.IChangeListener;
 import jobhunter.pane.ICompanyPane;
 import jobhunter.pane.IJobTitlePane;
 import jobhunter.pane.ILanguagePane;
@@ -37,7 +37,7 @@ import jobhunter.pane.RecruiterPane;
  * and open the template in the editor.
  */
 
-public class JobHunt implements ChangeListener{
+public class JobHunt implements IChangeListener{
     
     private CompanyPane company;
     private LocationPane location;

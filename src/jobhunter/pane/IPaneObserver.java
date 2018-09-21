@@ -11,5 +11,5 @@ package jobhunter.pane;
  */
 public interface IPaneObserver {
     
-    public void setDelegate(ChangeListener delegate);
+    public void setDelegate(IChangeListener delegate);
 }

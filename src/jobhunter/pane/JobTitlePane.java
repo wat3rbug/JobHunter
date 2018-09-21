@@ -12,9 +12,9 @@ public class JobTitlePane extends TabPane implements IJobTitlePane {
     
     private ArrayList<JobTitle> titleListing;
     private JobTitle temp;
-    ChangeListener delegate;
+    IChangeListener delegate;
 
-    public JobTitlePane(ChangeListener delegate) {
+    public JobTitlePane(IChangeListener delegate) {
         super("Job Title");
         this.delegate = delegate;
         titleListing = new ArrayList();
@@ -27,7 +27,7 @@ public class JobTitlePane extends TabPane implements IJobTitlePane {
     }
 
     @Override
-    public void setDelegate(ChangeListener delegate) {
+    public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
     

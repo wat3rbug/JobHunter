@@ -12,9 +12,9 @@ public class LocationPane extends TabPane implements ILocationPane {
     
     private ArrayList<Location> locationListing;
     private Location temp;
-    public ChangeListener delegate;
+    public IChangeListener delegate;
     
-    public LocationPane(ChangeListener delegate) {
+    public LocationPane(IChangeListener delegate) {
         super("Location");
         this.delegate = delegate;
         locationListing = new ArrayList<>();
@@ -27,7 +27,7 @@ public class LocationPane extends TabPane implements ILocationPane {
     }
 
     @Override
-    public void setDelegate(ChangeListener delegate) {
+    public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
     

@@ -3,7 +3,7 @@ package jobhunter.minipane;
 import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import jobhunter.pane.ChangeListener;
+import jobhunter.pane.IChangeListener;
 
 /**
  * @author Douglas Gardiner

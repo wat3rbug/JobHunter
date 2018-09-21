@@ -12,9 +12,9 @@ public class RecruiterPane extends TabPane implements IRecruiterPane {
 
     private ArrayList<Recruiter> recruiterListing;
     private Recruiter temp;
-    private ChangeListener delegate;
+    private IChangeListener delegate;
 
-    public RecruiterPane(ChangeListener delegate) {
+    public RecruiterPane(IChangeListener delegate) {
         super("Job Hunt Sites");
         this.delegate = delegate;
         recruiterListing = new ArrayList();
@@ -27,7 +27,7 @@ public class RecruiterPane extends TabPane implements IRecruiterPane {
     }
 
     @Override
-    public void setDelegate(ChangeListener delegate) {
+    public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
 

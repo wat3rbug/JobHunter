@@ -12,9 +12,9 @@ public class LanguagePane extends TabPane implements ILanguagePane {
 
     private ArrayList<Language> languageListing;
     private Language temp;
-    private ChangeListener delegate;
+    private IChangeListener delegate;
 
-    public LanguagePane(ChangeListener delegate) {
+    public LanguagePane(IChangeListener delegate) {
         super("Languages");
         this.delegate = delegate;
         languageListing = new ArrayList();
@@ -27,7 +27,7 @@ public class LanguagePane extends TabPane implements ILanguagePane {
     }
 
     @Override
-    public void setDelegate(ChangeListener delegate) {
+    public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
     
