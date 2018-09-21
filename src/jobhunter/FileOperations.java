@@ -80,9 +80,10 @@ public class FileOperations {
                 latestJob.appendChild(recruiterSite);
                 
                 Element langs = doc.createElement("languages");
-                for (int i = 0; i < job.langs.size(); i++) {
+                for (Language lang1 : job.langs) {
                     Element lang = doc.createElement("language");
-                    langs.appendChild(doc.createTextNode(job.langs.get(i).toString()));
+                    lang.appendChild(doc.createTextNode(lang1.toString()));
+                    langs.appendChild(lang);
                 }
                 latestJob.appendChild(langs);
                 
@@ -112,7 +113,7 @@ public class FileOperations {
     }
     
     public static ArrayList<Job> read(String filename) {
-        ArrayList<Job> results = new ArrayList<Job>();
+        ArrayList<Job> results = new ArrayList<>();
         File defaultFile = new File(filename);
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
@@ -127,7 +128,7 @@ public class FileOperations {
     
     private static ArrayList<Job> getJobList(Document doc) {
         
-        ArrayList<Job> jobList = new ArrayList<Job>();
+        ArrayList<Job> jobList = new ArrayList<>();
         doc.getDocumentElement().normalize();
         Element docElement = doc.getDocumentElement();
         NodeList nList = doc.getElementsByTagName("job");
