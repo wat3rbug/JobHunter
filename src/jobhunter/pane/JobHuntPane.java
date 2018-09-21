@@ -52,13 +52,19 @@ public class JobHuntPane extends JPanel {
         
         AddButton adder = new AddButton();
         
-        JPanel selectors = new JPanel();
-        selectors.add(titles);
-        selectors.add(languages);
-        selectors.add(companies);
-        selectors.add(locations);
-        selectors.add(recruiters);
-        BoxLayout boxlayout = new BoxLayout(selectors, BoxLayout.X_AXIS);
+        JPanel selectorsTopRow = new JPanel();
+        selectorsTopRow.add(titles);
+        selectorsTopRow.add(languages);
+        selectorsTopRow.add(companies);
+        BoxLayout boxlayout = new BoxLayout(selectorsTopRow, BoxLayout.X_AXIS);
+        
+        JPanel selectorsMiddleRow = new JPanel();
+        selectorsMiddleRow.add(locations);
+        selectorsMiddleRow.add(recruiters);
+        selectorsMiddleRow.add(adder);
+        BoxLayout boxLayoutMiddle = new BoxLayout(selectorsMiddleRow, 
+                BoxLayout.X_AXIS);
+        adder.addActionListener(new AddListener());
         
         // bottom panel with job listings
         
@@ -74,10 +80,10 @@ public class JobHuntPane extends JPanel {
         JPanel jobs = new JPanel();
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         jobs.add(listScroller); 
-        this.add(adder);
-        adder.addActionListener(new AddListener());
+
         
-        this.add(selectors);
+        this.add(selectorsTopRow);
+        this.add(selectorsMiddleRow);
         this.add(jobs);
         BoxLayout overall = new BoxLayout(this, BoxLayout.Y_AXIS);
     }

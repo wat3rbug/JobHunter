@@ -29,7 +29,14 @@ public class Job {
     
     
     public String toBriefString() {
-        return title + " at " + company.toString() + " using " + loc;
+        String message = title + " - ";
+        for (int i = 0; i < langs.size(); i++) {
+            if (i == (langs.size() - 1)) message += langs.get(i).toString();
+            else message += langs.get(i).toString() + ", ";
+        }
+        message += " - " + company.toString() + " - " + recruiter.toString()
+                + " at " + loc.toString();
+        return message;
     }
     
     public static Job getByXMLElement(Element el) {

@@ -21,6 +21,12 @@ import jobhunter.data.Company;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Language;
 import jobhunter.data.Location;
+import jobhunter.pane.ChangeListener;
+import jobhunter.pane.ICompanyPane;
+import jobhunter.pane.IJobTitlePane;
+import jobhunter.pane.ILanguagePane;
+import jobhunter.pane.ILocationPane;
+import jobhunter.pane.IRecruiterPane;
 import jobhunter.pane.LanguagePane;
 import jobhunter.pane.RecruiterPane;
 
@@ -31,7 +37,7 @@ import jobhunter.pane.RecruiterPane;
  * and open the template in the editor.
  */
 
-public class JobHunt {
+public class JobHunt implements ChangeListener{
     
     private CompanyPane company;
     private LocationPane location;
@@ -42,22 +48,23 @@ public class JobHunt {
     public String filename;
     
     public JobHunt() {
-        company = new CompanyPane();
-        location = new LocationPane();
-        title = new JobTitlePane();
-        recruiter = new RecruiterPane();
-        languages = new LanguagePane();
-        totals = new JobHuntPane(this);
+        company = new CompanyPane(this);
+        location = new LocationPane(this);
+        title = new JobTitlePane(this);
+        recruiter = new RecruiterPane(this);
+        languages = new LanguagePane(this);
+        totals = new JobHuntPane();
+     
         JFrame frame = new JFrame("JobHunter");
         JTabbedPane background = new JTabbedPane();
-        background.addTab("Company", null, company);
-        background.addTab("Location", null, location);
         background.addTab("Job Title", null, title);
         background.addTab("Languages", null, languages);
+        background.addTab("Company", null, company);
+        background.addTab("Location", null, location);    
         background.addTab("Job Sites", null, recruiter);
         background.addTab("Jobs", null, totals);
-        background.setPreferredSize(new Dimension (800, 400));
-        background.setMinimumSize(new Dimension (800, 400));
+        background.setPreferredSize(new Dimension (800, 550));
+        background.setMinimumSize(new Dimension (800, 550));
         JPanel overall = new JPanel();
         FlowLayout flow = new FlowLayout();
         overall.setLayout(flow);
@@ -69,6 +76,31 @@ public class JobHunt {
         frame.addWindowListener(new CloseUpShop());
         Application macApp = Application.getApplication();
         macApp.setQuitHandler(new CloseShopByHotKey());
+    }
+
+    @Override
+    public void receivedUpdate(ICompanyPane pane) {
+        totals.addCompany(pane.getCompany());
+    }
+
+    @Override
+    public void receivedUpdate(IJobTitlePane pane) {
+        totals.addTitle(pane.getJobTitle());
+    }
+
+    @Override
+    public void receivedUpdate(ILanguagePane pane) {
+        totals.addLanguage(pane.getLanguage());
+    }
+
+    @Override
+    public void receivedUpdate(ILocationPane pane) {
+        totals.addLoc(pane.getLoc());
+    }
+
+    @Override
+    public void receivedUpdate(IRecruiterPane pane) {
+        totals.addRecruiter(pane.getRecruiter());
     }
     
     private class CloseShopByHotKey implements QuitHandler {
