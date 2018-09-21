@@ -34,8 +34,8 @@ public class Job {
             if (i == (langs.size() - 1)) message += langs.get(i).toString();
             else message += langs.get(i).toString() + ", ";
         }
-        message += " - " + company.toString() + " - " + recruiter.toString()
-                + " at " + loc.toString();
+        message += " - " + company.toString() + " - " + loc.toString()
+                + " : " + recruiter.toString();
         return message;
     }
     

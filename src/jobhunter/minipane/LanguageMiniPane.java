@@ -34,4 +34,11 @@ public class LanguageMiniPane extends MiniPane {
     public void addLanguage(Language title) {
         if (!listing.contains(title.toString())) listing.addElement(title);
     }
+    
+    public ArrayList<Language> getSelected() {
+        int[] indexes = langListing.getSelectedIndices();
+        ArrayList<Language> result = new ArrayList<>();
+        for(int index : indexes) result.add(langListing.getModel().getElementAt(index));
+        return result;
+    }
 }

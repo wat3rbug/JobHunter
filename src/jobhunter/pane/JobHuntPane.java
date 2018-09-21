@@ -119,6 +119,7 @@ public class JobHuntPane extends JPanel {
             job.hadInterview = false;
             job.date = new Date();
             job.recruiter = recruiters.getSelected();
+            job.langs = languages.getSelected();
             jobs.add(job);
             joblist.addElement(job.toBriefString());
         }      
