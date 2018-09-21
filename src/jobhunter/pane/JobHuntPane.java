@@ -4,8 +4,6 @@ import java.awt.Dimension;
 import jobhunter.data.Job;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -15,6 +13,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import jobhunter.AddButton;
+import jobhunter.data.Company;
+import jobhunter.data.JobTitle;
+import jobhunter.data.Language;
+import jobhunter.data.Location;
+import jobhunter.data.Recruiter;
 import jobhunter.minipane.CompanyMiniPane;
 import jobhunter.minipane.JobTitleMiniPane;
 import jobhunter.minipane.LanguageMiniPane;
@@ -24,7 +27,7 @@ import jobhunter.minipane.RecruiterMiniPane;
 /**
  * @author Douglas Gardiner
  */
-public class JobHuntPane extends JPanel implements PropertyChangeListener{
+public class JobHuntPane extends JPanel {
     
     
     private DefaultListModel joblist;
@@ -36,7 +39,7 @@ public class JobHuntPane extends JPanel implements PropertyChangeListener{
     private LanguageMiniPane languages;
     private ArrayList<Job> jobs;
 
-    public JobHuntPane(Object delegate) {
+    public JobHuntPane() {
         
         // first 3 panels that list company, etc for adding a job
         
@@ -78,35 +81,25 @@ public class JobHuntPane extends JPanel implements PropertyChangeListener{
         this.add(jobs);
         BoxLayout overall = new BoxLayout(this, BoxLayout.Y_AXIS);
     }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        String caller = evt.getClass().getName();
-        if (caller.contains("Company")) companyAdded(evt);
-        if (caller.contains("Title")) titleAdded(evt);
-        if (caller.contains("Language")) companyAdded(evt);
-        if (caller.contains("Location")) titleAdded(evt);
-        if (caller.contains("Recruiter")) recruiterAdded(evt);
+    
+    public void addCompany(Company comp) {
+        companies.addCompany(comp);
     }
     
-    private void companyAdded(PropertyChangeEvent pce) {
-
+    public void addTitle(JobTitle title) {
+        titles.addTitle(title);
     }
     
-    private void titleAdded(PropertyChangeEvent pce) {
-        
-    }
-        
-    private void languageAdded(PropertyChangeEvent pce) {
-        
+    public void addLanguage(Language lang) {
+        languages.addLanguage(lang);
     }
     
-    private void locationAdded(PropertyChangeEvent pce) {
-        
+    public void addLoc(Location loc) {
+        locations.addLocation(loc);
     }
     
-    private void recruiterAdded(PropertyChangeEvent pce) {
-        
+    public void addRecruiter(Recruiter recruit) {
+        recruiters.addRecruiter(recruit);
     }
     
     private class AddListener implements ActionListener {

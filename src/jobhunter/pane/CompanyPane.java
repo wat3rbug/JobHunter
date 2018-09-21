@@ -1,11 +1,9 @@
 package jobhunter.pane;
 
-import jobhunter.pane.TabPane;
 import jobhunter.data.Company;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -17,18 +15,31 @@ import jobhunter.StringExtender;
  * @author Douglas Gardiner
  */
 
-public class CompanyPane extends TabPane {
+public class CompanyPane extends TabPane implements ICompanyPane {
 
     protected JCheckBox checker;
     private ArrayList<Company> companies;
+    private Company temp;
+    private ChangeListener delegate;
     
     
-    public CompanyPane() {
+    public CompanyPane(ChangeListener delegate) {
         super("Company");    
+        this.delegate = delegate;
         companies = new ArrayList<Company>();
         adder.addActionListener(new AddListener());
-        addEntry("Staffing", true);
+        addEntryField("Staffing", true);
 
+    }
+
+    @Override
+    public Company getCompany() {
+        return temp;
+    }
+
+    @Override
+    public void setDelegate(ChangeListener delegate) {
+        this.delegate = delegate;
     }
     protected class AddListener implements ActionListener {
 
@@ -37,13 +48,14 @@ public class CompanyPane extends TabPane {
             String name = insertField.getText();
             boolean staffing = checker.isSelected();
             String isStaffing = StringExtender.toYesNoString(staffing);
-            Company temp = new Company(name, isStaffing);
+            temp = new Company(name, isStaffing);
             companies.add(temp);
             addEntry(temp.toString());
+            if (delegate != null) delegate.receivedUpdate(CompanyPane.this);
         }     
     }
 
-    private void addEntry(String text, boolean isCheckBox) {
+    private void addEntryField(String text, boolean isCheckBox) {
         if (isCheckBox) AddCheckBox(text);
         else AddTextBox(text);
     }

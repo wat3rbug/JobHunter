@@ -1,34 +1,44 @@
 package jobhunter.pane;
 
-import jobhunter.pane.TabPane;
 import jobhunter.data.Location;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
 
 /**
  * @author Douglas Gardiner
  */
-public class LocationPane extends TabPane {
+public class LocationPane extends TabPane implements ILocationPane {
     
     private ArrayList<Location> locationListing;
+    private Location temp;
+    public ChangeListener delegate;
     
-    public LocationPane() {
+    public LocationPane(ChangeListener delegate) {
         super("Location");
-        locationListing = new ArrayList<Location>();
+        this.delegate = delegate;
+        locationListing = new ArrayList<>();
         adder.addActionListener(new AddListener());
+    }
+
+    @Override
+    public Location getLoc() {
+        return temp;
+    }
+
+    @Override
+    public void setDelegate(ChangeListener delegate) {
+        this.delegate = delegate;
     }
     
     protected class AddListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Location temp = new Location(insertField.getText());
+            temp = new Location(insertField.getText());
             locationListing.add(temp);
             addEntry(temp.toString());
+            if (delegate != null) delegate.receivedUpdate(LocationPane.this);
         }     
     }
 }
