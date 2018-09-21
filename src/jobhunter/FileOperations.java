@@ -78,6 +78,13 @@ public class FileOperations {
                         .toString()));
                 latestJob.appendChild(recruiterSite);
                 
+                Element langs = doc.createElement("languages");
+                for (int i = 0; i < job.langs.size(); i++) {
+                    Element lang = doc.createElement("language");
+                    langs.appendChild(doc.createTextNode(job.langs.get(i).toString()));
+                }
+                latestJob.appendChild(langs);
+                
                 Element company = doc.createElement("company");
                 Element companyName = doc.createElement("name");
                 companyName.appendChild(doc.createTextNode(job.company.companyName));

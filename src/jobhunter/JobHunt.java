@@ -20,6 +20,7 @@ import com.apple.eawt.QuitResponse;
 import jobhunter.data.Company;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Location;
+import jobhunter.pane.LanguagePane;
 import jobhunter.pane.RecruiterPane;
 
 /**
@@ -36,6 +37,7 @@ public class JobHunt {
     private JobTitlePane title;
     private RecruiterPane recruiter;
     private JobHuntPane totals;
+    private LanguagePane languages;
     public String filename;
     
     public JobHunt() {
@@ -43,12 +45,14 @@ public class JobHunt {
         location = new LocationPane();
         title = new JobTitlePane();
         recruiter = new RecruiterPane();
+        languages = new LanguagePane();
         totals = new JobHuntPane(this);
         JFrame frame = new JFrame("JobHunter");
         JTabbedPane background = new JTabbedPane();
         background.addTab("Company", null, company);
         background.addTab("Location", null, location);
         background.addTab("Job Title", null, title);
+        background.addTab("Languages", null, languages);
         background.addTab("Job Sites", null, recruiter);
         background.addTab("Jobs", null, totals);
         background.setPreferredSize(new Dimension (800, 400));

@@ -1,6 +1,7 @@
 package jobhunter.data;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import jobhunter.data.Company;
 import java.util.Date;
 import jobhunter.StringExtender;
@@ -20,6 +21,7 @@ public class Job {
     public Date date;
     public Recruiter recruiter;
     public boolean hadInterview;
+    public ArrayList<Language> langs;
     
     
     public String toBriefString() {

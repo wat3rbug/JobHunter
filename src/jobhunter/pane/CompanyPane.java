@@ -5,6 +5,7 @@ import jobhunter.data.Company;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ public class CompanyPane extends TabPane {
         companies = new ArrayList<Company>();
         adder.addActionListener(new AddListener());
         addEntry("Staffing", true);
+
     }
     protected class AddListener implements ActionListener {
 

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.Collection;
 import java.util.Set;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
