@@ -23,6 +23,10 @@ public class Job {
     public boolean hadInterview;
     public ArrayList<Language> langs;
     
+    public Job() {
+        langs = new ArrayList<Language>();
+    }
+    
     
     public String toBriefString() {
         return title + " at " + company.toString() + " using " + loc;

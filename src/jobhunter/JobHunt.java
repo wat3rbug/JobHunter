@@ -19,6 +19,7 @@ import com.apple.eawt.Application;
 import com.apple.eawt.QuitResponse;
 import jobhunter.data.Company;
 import jobhunter.data.JobTitle;
+import jobhunter.data.Language;
 import jobhunter.data.Location;
 import jobhunter.pane.LanguagePane;
 import jobhunter.pane.RecruiterPane;
@@ -102,16 +103,16 @@ public class JobHunt {
     
     public void use(ArrayList<Job> jobs) {
         
-        for(int i = 0; i < jobs.size(); i++) {
-            Job temp = jobs.get(i);
+        for (Job temp : jobs) {
             location.addEntry(temp.loc.toString());
             title.addEntry(temp.title.toString());
             company.addEntry(temp.company.toString());
             recruiter.addEntry(temp.recruiter.toString());
+            for (Language lang : temp.langs) {
+                languages.addEntry(lang.toString());
+            }
             totals.addJob(temp);
-        }
-        //company.add(companies);
-        
+        }        
     }
     
     /**

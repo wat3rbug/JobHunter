@@ -25,10 +25,6 @@ public class JobTitle {
         return jobTitle;
     }
     
-    public String toXML() {
-        return "\t<title>" + jobTitle + "</title>\n";
-    }
-    
     public static JobTitle getByXMLElement(Element el) {
         if (el == null) return null;
         String name = el.getElementsByTagName("title").item(0).getTextContent();

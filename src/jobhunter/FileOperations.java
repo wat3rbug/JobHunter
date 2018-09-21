@@ -18,6 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import jobhunter.data.Company;
 import jobhunter.data.Job;
 import jobhunter.data.JobTitle;
+import jobhunter.data.Language;
 import jobhunter.data.Location;
 import jobhunter.data.Recruiter;
 import org.w3c.dom.Node;
@@ -139,6 +140,7 @@ public class FileOperations {
             Recruiter recruiter = null;
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
             boolean interview = false;
+            ArrayList<Language> langs = null;
             if (listItem.getNodeType() == Node.ELEMENT_NODE) {
                 Element elem = (Element) listItem;
                 loc = Location.getByXMLElement(elem);
@@ -148,6 +150,7 @@ public class FileOperations {
                 interview = StringExtender.toBooleanValue(elem
                         .getElementsByTagName("interview").item(0)
                         .getTextContent());
+                langs = Language.getByXMLElement(elem);
                 try {
                     jobDate = formatter.parse(elem.getElementsByTagName("date")
                         .item(0).getTextContent());
@@ -162,6 +165,7 @@ public class FileOperations {
             job.hadInterview = interview;
             job.date = jobDate;
             job.recruiter = recruiter;
+            job.langs = langs;
             jobList.add(job);
         }
         return jobList;

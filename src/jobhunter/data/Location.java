@@ -24,10 +24,6 @@ public class Location {
         return loc;
     }
     
-    public String toXML() {
-        return "\t<location>" + loc + "</location>\n";
-    }
-    
     public static Location getByXMLElement(Element el) {
         if (el == null) return null;
         String name = el.getElementsByTagName("location").item(0).getTextContent();

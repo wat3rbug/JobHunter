@@ -32,15 +32,6 @@ public class Company {
     public String toString() {
         if (isStaffing == true) return companyName + ", staffing";
         else return companyName;
-        
-        // this should easily be written as but its not working with is IDE
-        // return companyName + (isStaffing ? ", staffing" : " ");
-    }
-    public String toXML() {
-        String message = "\t<company>\n\t\t<name>" + companyName + "</name>\n" +
-                "\t\t<staffing>" + StringExtender.toYesNoString(isStaffing) +
-                "</staffing>\n\t</company>\n";
-        return message;
     }
     
     public static Company getByXMLElement(Element el) {
