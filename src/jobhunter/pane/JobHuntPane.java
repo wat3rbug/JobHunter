@@ -131,12 +131,14 @@ public class JobHuntPane extends JPanel {
     
     public void addJob(Job job) {
         jobs.add(job);
-        companies.addCompany(job.company);
-        titles.addTitle(job.title);
-        locations.addLocation(job.loc);
-        recruiters.addRecruiter(job.recruiter);
-        for (int i = 0; i < job.langs.size(); i++) {
-            languages.addLanguage(job.langs.get(i));
+        if (job.company != null) companies.addCompany(job.company);
+        if (job.title != null) titles.addTitle(job.title);
+        if (job.loc != null) locations.addLocation(job.loc);
+        if (job.recruiter != null) recruiters.addRecruiter(job.recruiter);
+        if (job.langs != null) {
+            for (int i = 0; i < job.langs.size(); i++) {
+                languages.addLanguage(job.langs.get(i));
+            }
         }
         joblist.addElement(job.toBriefString());
     }

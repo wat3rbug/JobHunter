@@ -74,10 +74,12 @@ public class FileOperations {
                         .toYesNoString(job.hadInterview)));
                 latestJob.appendChild(hasInterview);
                 
-                Element recruiterSite = doc.createElement("recruiter");
-                recruiterSite.appendChild(doc.createTextNode(job.recruiter
+                if (job.recruiter != null) {
+                    Element recruiterSite = doc.createElement("recruiter");
+                    recruiterSite.appendChild(doc.createTextNode(job.recruiter
                         .toString()));
-                latestJob.appendChild(recruiterSite);
+                    latestJob.appendChild(recruiterSite);
+                }
                 
                 Element langs = doc.createElement("languages");
                 for (Language lang1 : job.langs) {
@@ -99,6 +101,7 @@ public class FileOperations {
                 latestJob.appendChild(company);
                 rootElement.appendChild(latestJob);
             }
+            doc.normalize();
             TransformerFactory tFactory = TransformerFactory.newInstance();
             Transformer tFormer = tFactory.newTransformer();
             DOMSource dSource = new DOMSource(doc);

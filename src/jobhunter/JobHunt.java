@@ -136,12 +136,15 @@ public class JobHunt implements IChangeListener{
     public void use(ArrayList<Job> jobs) {
         
         for (Job temp : jobs) {
-            location.addEntry(temp.loc.toString());
-            title.addEntry(temp.title.toString());
-            company.addEntry(temp.company.toString());
-            recruiter.addEntry(temp.recruiter.toString());
-            for (Language lang : temp.langs) {
-                languages.addEntry(lang.toString());
+            if (temp.loc != null) location.addEntry(temp.loc.toString());
+            if (temp.title != null) title.addEntry(temp.title.toString());
+            if (temp.company != null) company.addEntry(temp.company.toString());
+            if (temp.recruiter != null) recruiter.addEntry(temp.recruiter
+                    .toString());
+            if (temp.langs != null || temp.langs.size() != 0) {
+                for (Language lang : temp.langs) {
+                    languages.addEntry(lang.toString());
+                }
             }
             totals.addJob(temp);
         }        

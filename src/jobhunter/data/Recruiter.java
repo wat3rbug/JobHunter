@@ -1,6 +1,5 @@
 package jobhunter.data;
 
-import java.util.ArrayList;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -26,7 +25,12 @@ public class Recruiter {
     
     public static Recruiter getByXMLElement(Element el) {
         if (el == null) return null;
-        String name = el.getElementsByTagName("recruiter").item(0).getTextContent();
+        String name = null;
+        try {
+            name = el.getElementsByTagName("recruiter").item(0).getTextContent();
+        } catch (Exception e) {
+            return null;
+        }
         return new Recruiter(name);
     }
 }
