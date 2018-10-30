@@ -1,8 +1,6 @@
 package jobhunter.data;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import jobhunter.data.Company;
 import java.util.Date;
 import jobhunter.StringExtender;
 import org.w3c.dom.Element;
@@ -10,9 +8,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Basic data class for the application
+ * Basic data class for the application.  Store relevant information for a job.
  * @author Douglas Gardiner
  */
+
 public class Job {
 
     public JobTitle title;
@@ -27,6 +26,11 @@ public class Job {
         langs = new ArrayList<Language>();
     }
     
+    /**
+     * Gives a brief String for a job with all the details needed for display
+     * on the job listing panel.
+     * @return String of Company details in brief.
+     */
     
     public String toBriefString() {
         String message = title + " - ";
@@ -34,11 +38,19 @@ public class Job {
             if (i == (langs.size() - 1)) message += langs.get(i).toString();
             else message += langs.get(i).toString() + ", ";
         }
-        message += " - " + company.toString() + " - " + loc.toString()
-                + " : ";
+        message += " - " + company.toString() + " - Interviewed: " + 
+                StringExtender.toYesNoString(hadInterview) + " - " + 
+                loc.toString() + " : ";
         if (recruiter != null) message += recruiter.toString();
         return message;
     }
+    
+    /**
+     * Converts an XML Element to a Job object.  This is used for reading an
+     * XML file to get all the relevant details for the Company object.
+     * @param el
+     * @return a Company object with all the details of the company
+     */
     
     public static Job getByXMLElement(Element el) {
         if (el == null) return null;

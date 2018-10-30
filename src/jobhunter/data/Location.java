@@ -19,10 +19,23 @@ public class Location {
             this.id = lastId++;
     }
     
+    /**
+     * Overrides the standard toString() method so that display information is
+     * given in the job listing panel of the application.
+     * @return a String with the location.
+     */
+    
     @Override
     public String toString() {
         return loc;
     }
+    
+    /**
+     * Converts an XML Element to a Location object.  This is used for reading 
+     * an XML file to get all the relevant details for the Location object.
+     * @param el
+     * @return a Location object with all the details of the location.
+     */
     
     public static Location getByXMLElement(Element el) {
         if (el == null) return null;
