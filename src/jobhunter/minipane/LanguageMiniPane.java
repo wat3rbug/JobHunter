@@ -11,6 +11,8 @@ import jobhunter.data.Language;
 
 /**
  * @author Douglas Gardiner
+ * A basic mini display which is used on the JobHunt Pane.  It displays a brief
+ * synopsis of the language as it exists as an option.
  */
 public class LanguageMiniPane extends MiniPane {
 
@@ -31,9 +33,20 @@ public class LanguageMiniPane extends MiniPane {
         this.add(scroller);
     }
     
+    /**
+     * Adds a Language object to the listing so that it can be displayed.
+     * @param title The Language object that is to be added to the display.
+     */
+    
     public void addLanguage(Language title) {
         if (!listing.contains(title.toString())) listing.addElement(title);
     }
+    
+    /**
+     * Returns the selected Language object/s from the pane.  Since more than 
+     * one language can be selected and ArrayList is returned
+     * @return The Language objects that is derived from the listing.
+     */
     
     public ArrayList<Language> getSelected() {
         int[] indexes = langListing.getSelectedIndices();

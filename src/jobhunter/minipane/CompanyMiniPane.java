@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 
 /**
  * @author Douglas Gardiner
+ * A basic mini display which is used on the JobHunt Pane.  It displays a brief
+ * synopsis of the company as it exists as an option.
  */
 public class CompanyMiniPane extends MiniPane {
 
@@ -26,9 +28,20 @@ public class CompanyMiniPane extends MiniPane {
         this.add(scroller);
     }
     
+    /**
+     * Adds a Company object to the listing so that it can be displayed.
+     * @param company The Company object that is to be added to the display.
+     */
+    
     public void addCompany(Company company) {
         if (!listing.contains(company)) listing.addElement(company);
     }
+    
+    /**
+     * Returns the selected Company object from the pane.  NOTE: Only one 
+     * company can be selected. 
+     * @return The Company object that is derived from the listing.
+     */
     
     public Company getSelected() {
         return companyListing.getSelectedValue();

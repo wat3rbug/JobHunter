@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 
 /**
  * @author Douglas Gardiner
+ * A basic mini display which is used on the JobHunt Pane.  It displays a brief
+ * synopsis of the location as it exists as an option.
  */
 public class LocationMiniPane extends MiniPane {
 
@@ -29,9 +31,20 @@ public class LocationMiniPane extends MiniPane {
         this.add(scroller);
     }   
     
+    /**
+     * Adds a Location object to the listing so that it can be displayed.
+     * @param loc The Location object that is to be added to the display.
+     */
+    
     public void addLocation(Location loc) {
         if (!listing.contains(loc.toString())) listing.addElement(loc);
     }
+    
+    /**
+     * Returns the selected Location object from the pane.  NOTE: Only one 
+     * job title can be selected. 
+     * @return The Location object that is derived from the listing.
+     */
     
     public Location getSelected() {
         return locationListing.getSelectedValue();

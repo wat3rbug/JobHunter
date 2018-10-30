@@ -7,6 +7,9 @@ import jobhunter.pane.IChangeListener;
 
 /**
  * @author Douglas Gardiner
+ * A basic mini display which is used on the JobHunt Pane.  It contains the
+ * scaffolding needed for the classes that inherit the properties, and nothing
+ * more.
  */
 public abstract class MiniPane extends JPanel {
 

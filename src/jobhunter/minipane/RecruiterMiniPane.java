@@ -9,6 +9,8 @@ import jobhunter.data.Recruiter;
 
 /**
  * @author Douglas Gardiner
+ * A basic mini display which is used on the JobHunt Pane.  It displays a brief
+ * synopsis of the recruiter as it exists as an option.
  */
 public class RecruiterMiniPane extends MiniPane {
 
@@ -26,9 +28,20 @@ public class RecruiterMiniPane extends MiniPane {
         this.add(scroller);
     }   
     
+    /**
+     * Adds a Recruiter object to the listing so that it can be displayed.
+     * @param recruit The Recruiter object that is to be added to the display.
+     */
+    
     public void addRecruiter(Recruiter recruit) {
         if (!listing.contains(recruit.toString())) listing.addElement(recruit);
     }
+    
+    /**
+     * Returns the selected Recruiter object from the pane.  NOTE: Only one 
+     * recruiter can be selected. 
+     * @return The Recruiter object that is derived from the listing.
+     */
     
     public Recruiter getSelected() {
         return recruiterListing.getSelectedValue();
