@@ -11,9 +11,16 @@ import jobhunter.pane.IChangeListener;
  * scaffolding needed for the classes that inherit the properties, and nothing
  * more.
  */
+
 public abstract class MiniPane extends JPanel {
 
     private JList listing;
+    
+    /**
+     * This method provides a way to add a JList to the base pane for modularity
+     * purposes.
+     * @param listing The JList to add to the pane. 
+     */
 
     public void setListing(JList listing) {
         this.listing = listing;       
