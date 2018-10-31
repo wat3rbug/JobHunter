@@ -58,6 +58,7 @@ public class CompanyPane extends TabPane implements ICompanyPane {
     public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
+    
     protected class AddListener implements ActionListener {
 
         @Override

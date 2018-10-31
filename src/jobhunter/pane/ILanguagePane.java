@@ -1,17 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jobhunter.pane;
 
 import jobhunter.data.Language;
 
 /**
- *
- * @author Your Name <Douglas Gardiner>
+ * @author Douglas Gardiner
+ * An interface for the Language Pane.  
  */
+
 public interface ILanguagePane extends IPaneObserver{
+    
+    /**
+     * Returns the Language object from the object that implements this 
+     * interface.
+     * @return A Language object.
+     */
     
      public Language getLanguage();
 }

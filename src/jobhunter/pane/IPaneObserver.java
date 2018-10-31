@@ -1,15 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jobhunter.pane;
 
 /**
- *
- * @author Your Name <Douglas Gardiner>
+ * A based interface that sets up an observer pattern.  This is a slight 
+ * deviation because only a base model needs to exist.  Java implementation has
+ * some limitations as it is NOT an interface but a class with some class
+ * restrictions.
+ * @author Douglas Gardiner
  */
+
 public interface IPaneObserver {
+    
+    /**
+     * Sets the reference to an object which implements the IChangeListener
+     * interface. 
+     * @param delegate The object reference that meets the IChangeListener 
+     * interface. 
+     */
     
     public void setDelegate(IChangeListener delegate);
 }

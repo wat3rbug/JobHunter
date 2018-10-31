@@ -1,17 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jobhunter.pane;
 
 import jobhunter.data.JobTitle;
 
 /**
- *
- * @author Your Name <Douglas Gardiner>
+ * @author Douglas Gardiner
+ * An interface for the JobTitle Pane.  
  */
+
 public interface IJobTitlePane extends IPaneObserver{
+    
+    /**
+     * Returns the JobTitle object from the object that implements this 
+     * interface.
+     * @return A JobTitle object.
+     */
     
     public JobTitle getJobTitle();
 }
