@@ -15,6 +15,7 @@ public class AddButton extends JButton {
     private static final long serialVersionUID = -1019539337741869743L;
     
     public AddButton() {
+        //ImageIcon icon = UIManager.getI
         this.setText("Add");
     }
 }
