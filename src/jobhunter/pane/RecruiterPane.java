@@ -7,6 +7,8 @@ import jobhunter.data.Recruiter;
 
 /**
  * @author Douglas Gardiner
+ * A Tabbed Pane used for displaying Recruiter info to add to the main job hunt 
+ * pane.
  */
 public class RecruiterPane extends TabPane implements IRecruiterPane {
 
@@ -20,18 +22,32 @@ public class RecruiterPane extends TabPane implements IRecruiterPane {
         recruiterListing = new ArrayList();
         adder.addActionListener(new AddListener());
     }
+    
+    /**
+     * Returns the Recruiter object that was added via this pane.  It is used by 
+     * the delegate object.  See IChangeListener for implementation details.
+     * @return The Recruiter object that was added via this pane.
+     */
 
     @Override
     public Recruiter getRecruiter() {
         return temp;
     }
 
+    /**
+     * Sets a delegate so that when changes occur to this pane, the delegate
+     * is notified.  This uses the IChangeListener interface so that only 
+     * classes that use this interface can participate.  The delegate is an 
+     * optional object.
+     * @param delegate The IChangeListener object that will be notified when a 
+     * change occurs.
+     */
+    
     @Override
     public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
     }
-
-    
+   
     protected class AddListener implements ActionListener {
 
         @Override

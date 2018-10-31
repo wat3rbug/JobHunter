@@ -13,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import jobhunter.AddButton;
+import jobhunter.InterviewButton;
 import jobhunter.data.Company;
 import jobhunter.data.JobTitle;
 import jobhunter.data.Language;
@@ -26,6 +27,8 @@ import jobhunter.minipane.RecruiterMiniPane;
 
 /**
  * @author Douglas Gardiner
+ * A Tabbed Pane used for displaying All the job hunt info for adding jobs that 
+ * were applied to, as well as the interview progress.
  */
 public class JobHuntPane extends JPanel {
     
@@ -51,6 +54,7 @@ public class JobHuntPane extends JPanel {
         jobs = new ArrayList<Job>();
         
         AddButton adder = new AddButton();
+        InterviewButton interviewBtn = new InterviewButton();
         
         JPanel selectorsTopRow = new JPanel();
         selectorsTopRow.add(titles);
@@ -65,6 +69,7 @@ public class JobHuntPane extends JPanel {
         BoxLayout boxLayoutMiddle = new BoxLayout(selectorsMiddleRow, 
                 BoxLayout.X_AXIS);
         adder.addActionListener(new AddListener());
+        interviewBtn.addActionListener(new InterviewListener());
         
         // bottom panel with job listings
         
@@ -81,6 +86,7 @@ public class JobHuntPane extends JPanel {
         jobs.setBorder(BorderFactory.createTitledBorder("Jobs Applied"));
         jobs.add(listScroller); 
 
+        jobs.add(interviewBtn);
         
         this.add(selectorsTopRow);
         this.add(selectorsMiddleRow);
@@ -88,24 +94,85 @@ public class JobHuntPane extends JPanel {
         BoxLayout overall = new BoxLayout(this, BoxLayout.Y_AXIS);
     }
     
+    /**
+     * Used for adding a Company to this panel.  Normally this is done as the 
+     * result of a change on the Company Tabbed Pane using this pane as a 
+     * delegate.
+     * @param comp The Company to add to the CompanyMiniPane.
+     */
+    
     public void addCompany(Company comp) {
         companies.addCompany(comp);
     }
+    
+    /**
+     * Used for adding a JobTitle to this panel.  Normally this is done as the 
+     * result of a change on the Job Title Tabbed Pane using this pane as a 
+     * delegate.
+     * @param title The JobTitle to add to the JobTitleMiniPane.
+     */
     
     public void addTitle(JobTitle title) {
         titles.addTitle(title);
     }
     
+    /**
+     * Used for adding a Language to this panel.  Normally this is done as the 
+     * result of a change on the Language Tabbed Pane using this pane as a 
+     * delegate.
+     * @param lang The Language to add to the LanguageMiniPane.
+     */
+    
     public void addLanguage(Language lang) {
         languages.addLanguage(lang);
     }
+    
+    /**
+     * Used for adding a Location to this panel.  Normally this is done as the 
+     * result of a change on the Location Tabbed Pane using this pane as a 
+     * delegate.
+     * @param loc The Location to add to the LocationMiniPane.
+     */
     
     public void addLoc(Location loc) {
         locations.addLocation(loc);
     }
     
+    /**
+     * Used for adding a Recruiter to this panel.  Normally this is done as the 
+     * result of a change on the Recruiter Tabbed Pane using this pane as a 
+     * delegate.
+     * @param loc The Recruiter to add to the RecruiterMiniPane.
+     */
+    
     public void addRecruiter(Recruiter recruit) {
         recruiters.addRecruiter(recruit);
+    }
+    
+    private class InterviewListener implements ActionListener {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String temp = (String)joblistings.getSelectedValue();
+            for (Job job : jobs) {
+                if (temp.contains(job.company.companyName) && 
+                        temp.contains(job.title.jobTitle))
+                {
+                    if ((job.recruiter!= null && temp.contains(job.recruiter.recruiter)) 
+                             || (job.recruiter == null)) {
+                        job.hadInterview = true;
+                    }
+                }
+            }
+            // redo the jlist
+            
+            joblist = new DefaultListModel();
+            joblistings = new JList(joblist);
+            for (Job job : jobs) {
+                joblist.addElement(job.toBriefString());
+            } 
+            joblistings.updateUI();
+        }
     }
     
     private class AddListener implements ActionListener {
@@ -125,9 +192,20 @@ public class JobHuntPane extends JPanel {
         }      
     }
     
+    /**
+     * Gets the ArrayList of jobs from the pane.
+     * @return An ArrayList of Job objects from the pane.
+     */
+    
     public ArrayList<Job> getJobs() {
         return jobs;
     }
+    
+    /**
+     * Adds a job to the pane.  Used during the initial load of the application
+     * where the panel is populated based on the file used.
+     * @param job The Job object after it has been converted from XML.
+     */
     
     public void addJob(Job job) {
         jobs.add(job);

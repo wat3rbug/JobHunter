@@ -65,6 +65,11 @@ public class TabPane extends JPanel {
         this.add(listingPanel);
     }
     
+    /**
+     * This method adds a string to the JList that pertains to the pane.  
+     * @param text The String to be added to the JList.
+     */
+    
     public void addEntry(String text) {
         if (!objectListing.contains(text)) objectListing.addElement(text);
     }

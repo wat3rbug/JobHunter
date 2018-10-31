@@ -13,6 +13,8 @@ import jobhunter.StringExtender;
 
 /**
  * @author Douglas Gardiner
+ * A Tabbed Pane used for displaying Company info to add to the main job hunt 
+ * pane.
  */
 
 public class CompanyPane extends TabPane implements ICompanyPane {
@@ -31,12 +33,27 @@ public class CompanyPane extends TabPane implements ICompanyPane {
         addEntryField("Staffing", true);
 
     }
-
+    
+    /**
+     * Returns the Company object that was added via this pane.  It is used by 
+     * the delegate object.  See IChangeListener for implementation details.
+     * @return The Company object that was added via this pane.
+     */
+    
     @Override
     public Company getCompany() {
         return temp;
     }
 
+    /**
+     * Sets a delegate so that when changes occur to this pane, the delegate
+     * is notified.  This uses the IChangeListener interface so that only 
+     * classes that use this interface can participate.  The delegate is an 
+     * optional object.
+     * @param delegate The IChangeListener object that will be notified when a 
+     * change occurs.
+     */
+    
     @Override
     public void setDelegate(IChangeListener delegate) {
         this.delegate = delegate;
