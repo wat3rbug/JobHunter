@@ -17,10 +17,7 @@ import javax.swing.JTabbedPane;
 import com.apple.eawt.QuitHandler;
 import com.apple.eawt.Application;
 import com.apple.eawt.QuitResponse;
-import jobhunter.data.Company;
-import jobhunter.data.JobTitle;
 import jobhunter.data.Language;
-import jobhunter.data.Location;
 import jobhunter.pane.IChangeListener;
 import jobhunter.pane.ICompanyPane;
 import jobhunter.pane.IJobTitlePane;
@@ -78,6 +75,10 @@ public class JobHunt implements IChangeListener{
         macApp.setQuitHandler(new CloseShopByHotKey());
     }
 
+    /**
+     * 
+     * @param pane 
+     */
     @Override
     public void receivedUpdate(ICompanyPane pane) {
         totals.addCompany(pane.getCompany());

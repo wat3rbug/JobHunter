@@ -27,16 +27,40 @@ import org.w3c.dom.NodeList;
 
 /**
  * @author Douglas Gardiner
+ * This class is essentially a collection of static methods that act on a File
+ * for the purposes of reading and writing to a file.
  */
+
 public class FileOperations {
 
+    /**
+     * Returns an ArrayList of Job objects.  Since it has no arguments the 
+     * 'config.xml' is used by default.
+     * @return The ArrayList of Job objects from the file.
+     */
+    
     public static ArrayList<Job> read() {
         return read("config.xml");
     }
     
+    /**
+     * Writes an ArrayList of Job objects as an XML file.  Since it has no 
+     * arguments the 'config.xml' is used by default.
+     * @param jobs The ArrayList of Job objects to be converted into an XML
+     * document.
+     */
+    
     public static void write(ArrayList<Job> jobs) {
         write("config.xml", jobs);
     }
+    
+    /**
+     * Writes an ArrayList of Job objects as an XML file.  If it fails to
+     * write the file for whatever reason, there will be a comment in the
+     * Command Console saying that it was unsuccessful. 
+     * @param filename The String name for the file to be used.
+     * @param jobs The ArrayList of Job objects to be converted to an XML file.
+     */
     
     public static void write(String filename, ArrayList<Job> jobs) {
         
@@ -114,6 +138,15 @@ public class FileOperations {
             System.out.println("transform failed");
         }      
     }
+    
+    /**
+     * Returns an ArrayList of Job objects.  If there is an issue reading the
+     * file, whatever file name is used, it will fail quietly and continue with
+     * the rest of the application.
+     * @param filename The String name of the file to read.  NOTE: It must be in 
+     * XML format, otherwise an empty ArrayList will be returned.
+     * @return The ArrayList of Job objects from the file.
+     */
     
     public static ArrayList<Job> read(String filename) {
         ArrayList<Job> results = new ArrayList<>();
