@@ -35,7 +35,17 @@ public class JobTitleMiniPane extends MiniPane{
      */
     
     public void addTitle(JobTitle title) {
-        if (!listing.contains(title.toString())) listing.addElement(title);
+        int found = -1;
+        int max = listing.getSize();
+        for (int i = 0; i < max; i++) {
+            if (listing.get(i).jobTitle.toLowerCase().contains(
+                    title.jobTitle.toLowerCase())) {
+                found = i;
+            }
+        }
+        if (found == -1) {
+            listing.addElement(title);
+        }
     }
     
     /**

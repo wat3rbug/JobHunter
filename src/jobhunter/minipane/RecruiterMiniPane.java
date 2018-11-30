@@ -34,7 +34,17 @@ public class RecruiterMiniPane extends MiniPane {
      */
     
     public void addRecruiter(Recruiter recruit) {
-        if (!listing.contains(recruit.toString())) listing.addElement(recruit);
+        int found = -1;
+        int max = listing.getSize();
+        for (int i = 0; i < max; i++) {
+            if (listing.get(i).recruiter.toLowerCase().contains(
+                    recruit.recruiter.toLowerCase())) {
+                found = i;
+            }
+        }
+        if (found == -1) {
+            listing.addElement(recruit);
+        }
     }
     
     /**

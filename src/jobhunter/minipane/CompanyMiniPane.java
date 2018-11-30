@@ -34,7 +34,18 @@ public class CompanyMiniPane extends MiniPane {
      */
     
     public void addCompany(Company company) {
-        if (!listing.contains(company)) listing.addElement(company);
+                
+        int found = -1;
+        int max = listing.getSize();
+        for (int i = 0; i < max; i++) {
+            if (listing.get(i).companyName.toLowerCase().contains(
+                    company.companyName.toLowerCase())) {
+                found = i;
+            }
+        }
+        if (found == -1) {
+            listing.addElement(company);
+        }
     }
     
     /**

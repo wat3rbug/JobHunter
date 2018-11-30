@@ -7,6 +7,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.Position;
 import jobhunter.data.Language;
 
 /**
@@ -39,7 +40,17 @@ public class LanguageMiniPane extends MiniPane {
      */
     
     public void addLanguage(Language title) {
-        if (!listing.contains(title.toString())) listing.addElement(title);
+        int found = -1;
+        int max = listing.getSize();
+        for (int i = 0; i < max; i++) {
+            if (listing.get(i).language.toLowerCase().contains(
+                    title.language.toLowerCase())) {
+                found = i;
+            }
+        }
+        if (found == -1) {
+            listing.addElement(title);
+        }
     }
     
     /**

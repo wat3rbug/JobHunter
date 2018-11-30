@@ -37,7 +37,17 @@ public class LocationMiniPane extends MiniPane {
      */
     
     public void addLocation(Location loc) {
-        if (!listing.contains(loc.toString())) listing.addElement(loc);
+        int found = -1;
+        int max = listing.getSize();
+        for (int i = 0; i < max; i++) {
+            if (listing.get(i).loc.toLowerCase().contains(
+                    loc.loc.toLowerCase())) {
+                found = i;
+            }
+        }
+        if (found == -1) {
+            listing.addElement(loc);
+        }
     }
     
     /**

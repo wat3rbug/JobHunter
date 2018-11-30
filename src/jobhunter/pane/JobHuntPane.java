@@ -41,6 +41,7 @@ public class JobHuntPane extends JPanel {
     private RecruiterMiniPane recruiters;
     private LanguageMiniPane languages;
     private ArrayList<Job> jobs;
+    private JScrollPane listScroller;
 
     public JobHuntPane() {
         
@@ -75,7 +76,7 @@ public class JobHuntPane extends JPanel {
         
         joblist = new DefaultListModel();
         joblistings = new JList(joblist);
-        JScrollPane listScroller = new JScrollPane(joblistings);
+        listScroller = new JScrollPane(joblistings);
         listScroller.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         Dimension miniDim = titles.getSize();
         
@@ -154,6 +155,7 @@ public class JobHuntPane extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             String temp = (String)joblistings.getSelectedValue();
+            Job selectedTarget = null;
             for (Job job : jobs) {
                 if (temp.contains(job.company.companyName) && 
                         temp.contains(job.title.jobTitle))
@@ -161,16 +163,18 @@ public class JobHuntPane extends JPanel {
                     if ((job.recruiter!= null && temp.contains(job.recruiter.recruiter)) 
                              || (job.recruiter == null)) {
                         job.hadInterview = true;
+                        selectedTarget = job;
                     }
                 }
             }
-            // redo the jlist
+            // redo the jlist -- still BROKE
             
-            joblist = new DefaultListModel();
-            joblistings = new JList(joblist);
-            for (Job job : jobs) {
-                joblist.addElement(job.toBriefString());
-            } 
+            
+//            if (selectedTarget != null) {
+//                joblist.addElement(selectedTarget.toBriefString());
+//                joblistings.remove(joblistings.getSelectedIndex());
+//            }
+                
             joblistings.updateUI();
         }
     }
