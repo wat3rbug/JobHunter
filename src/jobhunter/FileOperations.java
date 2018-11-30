@@ -11,6 +11,7 @@ import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -128,6 +129,7 @@ public class FileOperations {
             doc.normalize();
             TransformerFactory tFactory = TransformerFactory.newInstance();
             Transformer tFormer = tFactory.newTransformer();
+            tFormer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource dSource = new DOMSource(doc);
             StreamResult sResult = new StreamResult(new File(filename));
             tFormer.transform(dSource, sResult);
