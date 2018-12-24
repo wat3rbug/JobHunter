@@ -43,7 +43,7 @@ public class LanguageMiniPane extends MiniPane {
         int found = -1;
         int max = listing.getSize();
         for (int i = 0; i < max; i++) {
-            if (listing.get(i).language.toLowerCase().contains(
+            if (listing.get(i).language.toLowerCase().equals(
                     title.language.toLowerCase())) {
                 found = i;
             }

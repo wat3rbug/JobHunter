@@ -40,7 +40,7 @@ public class LocationMiniPane extends MiniPane {
         int found = -1;
         int max = listing.getSize();
         for (int i = 0; i < max; i++) {
-            if (listing.get(i).loc.toLowerCase().contains(
+            if (listing.get(i).loc.toLowerCase().equals(
                     loc.loc.toLowerCase())) {
                 found = i;
             }

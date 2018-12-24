@@ -38,7 +38,7 @@ public class JobTitleMiniPane extends MiniPane{
         int found = -1;
         int max = listing.getSize();
         for (int i = 0; i < max; i++) {
-            if (listing.get(i).jobTitle.toLowerCase().contains(
+            if (listing.get(i).jobTitle.toLowerCase().equals(
                     title.jobTitle.toLowerCase())) {
                 found = i;
             }
