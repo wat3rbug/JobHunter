@@ -72,6 +72,8 @@ public class DatePane extends JPanel implements IDatePane {
         @Override
         public void actionPerformed(ActionEvent ae) {
             selectedDate = null;
+            Calendar cal = Calendar.getInstance();
+            selectedDateLbl.setText(filterForDate.format(cal.getTime()));
             if (delegate !=null) delegate.receivedUpdate(DatePane.this);
         }
     }
@@ -82,7 +84,8 @@ public class DatePane extends JPanel implements IDatePane {
         public void actionPerformed(ActionEvent ae) {
             
             Calendar cal = getDate();
-            cal.roll(Calendar.DAY_OF_MONTH, NEXT_DATE);
+            cal.roll(Calendar.MONTH, NEXT_DATE);
+            if (cal.get(Calendar.MONTH) == 0) cal.roll(Calendar.YEAR, NEXT_DATE);
             selectedDateLbl.setText(filterForDate.format(cal.getTime()));
             selectedDate = cal.getTime();
             if (delegate !=null) delegate.receivedUpdate(DatePane.this);
@@ -108,7 +111,8 @@ public class DatePane extends JPanel implements IDatePane {
         public void actionPerformed(ActionEvent ae) {
             
             Calendar cal = getDate();
-            cal.roll(Calendar.DAY_OF_MONTH, PREVIOUS_DATE);
+            if (cal.get(Calendar.MONTH) == 0) cal.roll(Calendar.YEAR, PREVIOUS_DATE);
+            cal.roll(Calendar.MONTH, PREVIOUS_DATE);
             selectedDateLbl.setText(filterForDate.format(cal.getTime()));
             selectedDate = cal.getTime();
             if (delegate !=null) delegate.receivedUpdate(DatePane.this);

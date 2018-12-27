@@ -182,9 +182,14 @@ public class JobHuntPane extends JPanel implements IChangeListener {
     @Override
     public void receivedUpdate(IDatePane pane) {
         Date result = dateFilter.getSelectedDate();
-        // do some other stuff to filter jlist
-        
-        
+        ArrayList<Job> filteredJobs = new ArrayList<Job>();
+        joblist.clear();
+        for(Job job : jobs) {
+            if (result ==null || job.date.before(result) || job.date.equals(result)) {
+                filteredJobs.add(job);
+                joblist.addElement(job.toBriefString());
+            }
+        } 
     }
     
     private class InterviewListener implements ActionListener {

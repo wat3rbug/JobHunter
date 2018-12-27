@@ -107,7 +107,7 @@ public class JobHunt implements IChangeListener{
 
     @Override
     public void receivedUpdate(IDatePane pane) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     private class CloseShopByHotKey implements QuitHandler {
