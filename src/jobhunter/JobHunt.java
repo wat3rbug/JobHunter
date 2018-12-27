@@ -20,6 +20,7 @@ import com.apple.eawt.QuitResponse;
 import jobhunter.data.Language;
 import jobhunter.pane.IChangeListener;
 import jobhunter.pane.ICompanyPane;
+import jobhunter.pane.IDatePane;
 import jobhunter.pane.IJobTitlePane;
 import jobhunter.pane.ILanguagePane;
 import jobhunter.pane.ILocationPane;
@@ -102,6 +103,11 @@ public class JobHunt implements IChangeListener{
     @Override
     public void receivedUpdate(IRecruiterPane pane) {
         totals.addRecruiter(pane.getRecruiter());
+    }
+
+    @Override
+    public void receivedUpdate(IDatePane pane) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     private class CloseShopByHotKey implements QuitHandler {

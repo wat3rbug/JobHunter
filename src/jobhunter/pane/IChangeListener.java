@@ -58,4 +58,6 @@ public interface IChangeListener {
      */
     
     public void receivedUpdate(IRecruiterPane pane); 
+    
+    public void receivedUpdate(IDatePane pane);
 }

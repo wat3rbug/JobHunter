@@ -24,13 +24,14 @@ import jobhunter.minipane.JobTitleMiniPane;
 import jobhunter.minipane.LanguageMiniPane;
 import jobhunter.minipane.LocationMiniPane;
 import jobhunter.minipane.RecruiterMiniPane;
+import jobhunter.minipane.DatePane;
 
 /**
  * @author Douglas Gardiner
  * A Tabbed Pane used for displaying All the job hunt info for adding jobs that 
  * were applied to, as well as the interview progress.
  */
-public class JobHuntPane extends JPanel {
+public class JobHuntPane extends JPanel implements IChangeListener {
     
     
     private DefaultListModel joblist;
@@ -40,6 +41,7 @@ public class JobHuntPane extends JPanel {
     private JobTitleMiniPane titles;
     private RecruiterMiniPane recruiters;
     private LanguageMiniPane languages;
+    private DatePane dateFilter;
     private ArrayList<Job> jobs;
     private JScrollPane listScroller;
 
@@ -47,6 +49,7 @@ public class JobHuntPane extends JPanel {
         
         // first 3 panels that list company, etc for adding a job
         
+        dateFilter = new DatePane(this);
         companies = new CompanyMiniPane();
         locations = new LocationMiniPane();
         titles = new JobTitleMiniPane();
@@ -64,6 +67,7 @@ public class JobHuntPane extends JPanel {
         BoxLayout boxlayout = new BoxLayout(selectorsTopRow, BoxLayout.X_AXIS);
         
         JPanel selectorsMiddleRow = new JPanel();
+        selectorsMiddleRow.add(dateFilter);
         selectorsMiddleRow.add(locations);
         selectorsMiddleRow.add(recruiters);
         selectorsMiddleRow.add(adder);
@@ -149,6 +153,39 @@ public class JobHuntPane extends JPanel {
     public void addRecruiter(Recruiter recruit) {
         recruiters.addRecruiter(recruit);
     }
+
+    @Override
+    public void receivedUpdate(ICompanyPane pane) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void receivedUpdate(IJobTitlePane pane) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void receivedUpdate(ILanguagePane pane) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void receivedUpdate(ILocationPane pane) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void receivedUpdate(IRecruiterPane pane) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void receivedUpdate(IDatePane pane) {
+        Date result = dateFilter.getSelectedDate();
+        // do some other stuff to filter jlist
+        
+        
+    }
     
     private class InterviewListener implements ActionListener {
         
@@ -166,15 +203,7 @@ public class JobHuntPane extends JPanel {
                         selectedTarget = job;
                     }
                 }
-            }
-            // redo the jlist -- still BROKE
-            
-            
-//            if (selectedTarget != null) {
-//                joblist.addElement(selectedTarget.toBriefString());
-//                joblistings.remove(joblistings.getSelectedIndex());
-//            }
-                
+            }    
             joblistings.updateUI();
         }
     }
