@@ -6,3 +6,5 @@ Things learned.
 2.  Object/Listener design pattern isn't well implemented as compared to Objective-C's version.  The listener is a concrete class, and so implementation becomes more of an issue.  I got around this, but it is not the most elegant solution.
 3.  I was clearly designing this as I went.  There are some linked list objects, which are not used.  I didn't know at the time whether I would use them and they are simple to create.
 4. The layout and spacing isn't the best, as I added 2 more fields during the process.
+
+   It has been a few years since I wrote this and actually Im a bit embarrassed by it.  I didn't use a whole lot of forethought and went with group think.  There are design patterns that are used that dont work well for this particular application and needlessly made thing complicated.  It basically said I can do this, but it isnt elligant.  Forgot to use KISS method.  This could be written more succinctly.
